@@ -1,45 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
-import 'package:smart_check/core/widgets/search_text_field.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
-
+  const CustomAppBar({super.key, required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 16.h),
-        SizedBox(
-          width: 70.w,
-          height: 22.h,
-          child: Image.asset(
-            'assets/images/route.png',
-            width: 66.w,
-            height: 22.h,
-            fit: BoxFit.fill,
-            color: ColorManager.darkPrimary,
+    return SizedBox(
+      width: 200.w,
+      child: Stack(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 16.h),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Image.asset('assets/images/icon1.png', fit: BoxFit.fill),
           ),
-        ),
-        SizedBox(height: 18.h),
-        Row(
-          children: [
-            const Expanded(child: SearchTextField()),
-            SizedBox(width: 24.w),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, 'cart');
-              },
-              child: ImageIcon(
-                size: 24.w,
-                const AssetImage('assets/images/cart.png'),
+
+          Positioned(
+            left: 80.w,
+            top: 50.h,
+
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: ColorManager.darkPrimary,
               ),
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:smart_check/core/theme/color_manager.dart';
 class DefaultTextField extends StatefulWidget {
   const DefaultTextField({
     super.key,
-    required this.hintText,
+    required this.label,
     this.suffixIcon,
     this.validator,
     required this.controller,
@@ -14,7 +14,7 @@ class DefaultTextField extends StatefulWidget {
     this.maxLength,
     this.autoValidate = true,
   });
-  final String hintText;
+  final String label;
   final Widget? suffixIcon;
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
@@ -39,7 +39,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
         contentPadding: EdgeInsets.symmetric(vertical: 23.h, horizontal: 16.h),
         fillColor: ColorManager.white,
         filled: true,
-        hintText: widget.hintText,
+        label: Text(widget.label),
         errorStyle: TextStyle(color: ColorManager.red, fontSize: 16.sp),
         suffixIcon: widget.isPassword
             ? IconButton(
@@ -50,22 +50,22 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
               )
             : null,
         border: OutlineInputBorder(
-          borderSide: const BorderSide(color: ColorManager.blueGrey),
+          borderSide: const BorderSide(color: ColorManager.navy),
           borderRadius: BorderRadius.circular(15.r),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: ColorManager.blueGrey),
+          borderSide: const BorderSide(color: ColorManager.navy),
           borderRadius: BorderRadius.circular(15.r),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: ColorManager.blueGrey),
+          borderSide: const BorderSide(color: ColorManager.navy),
           borderRadius: BorderRadius.circular(15.r),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: ColorManager.red),
           borderRadius: BorderRadius.circular(15.r),
         ),
-        hintStyle: Theme.of(
+        labelStyle: Theme.of(
           context,
         ).textTheme.titleMedium!.copyWith(color: ColorManager.textColor),
       ),

@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 
-class DefaultButtonCartProductScreen extends StatelessWidget {
+class DefaultButton extends StatelessWidget {
   final void Function()? onPressed;
   final String label;
   final Icon icon;
-  final IconAlignment iconAlignment;
-  const DefaultButtonCartProductScreen({
+
+  const DefaultButton({
     super.key,
     required this.onPressed,
     required this.label,
     required this.icon,
-    required this.iconAlignment,
   });
   @override
   Widget build(BuildContext context) {
@@ -27,21 +26,21 @@ class DefaultButtonCartProductScreen extends StatelessWidget {
             fontSize: 20.sp,
             fontWeight: FontWeight.w500,
           ),
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.start,
         ),
       ),
       icon: SizedBox(width: 60.w, child: icon),
       style: ElevatedButton.styleFrom(
         iconColor: ColorManager.white,
         iconSize: 28.sp,
-        backgroundColor: ColorManager.primary,
+        backgroundColor: ColorManager.darkPrimary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
         // minimumSize: Size(270.w, 50.h),
-        fixedSize: Size(270.w, 50.h),
+        fixedSize: Size(3100.w, 70.h),
       ),
-      iconAlignment: iconAlignment,
+      iconAlignment: IconAlignment.end,
     );
   }
 }

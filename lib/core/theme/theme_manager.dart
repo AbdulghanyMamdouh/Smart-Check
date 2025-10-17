@@ -34,8 +34,13 @@ class ThemeManager {
     textTheme: const TextTheme(
       titleMedium: TextStyle(
         fontSize: 18,
-        fontWeight: FontWeight.w400,
-        color: ColorManager.white,
+        fontWeight: FontWeight.w600,
+        color: ColorManager.darkPrimary,
+      ),
+      titleLarge: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w700,
+        color: ColorManager.navy,
       ),
     ),
   );
