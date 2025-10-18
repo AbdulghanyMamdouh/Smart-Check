@@ -7,32 +7,32 @@ class SearchTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      cursorColor: Theme.of(context).primaryColor,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 16.h),
-        prefixIcon: Padding(
-          padding: EdgeInsets.only(left: 24.07.w),
-          child: Image.asset('assets/images/search.png'),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.r),
-          borderSide: const BorderSide(color: ColorManager.primary),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.r),
-          borderSide: const BorderSide(color: ColorManager.primary),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.r),
-          borderSide: const BorderSide(color: ColorManager.primary),
-        ),
-        hintText: 'what do you search for?',
-        fillColor: ColorManager.textColor,
-        hintStyle: TextStyle(
-          fontSize: 14.sp,
-          fontWeight: FontWeight.normal,
-          color: const Color.fromRGBO(6, 0, 79, 0.6),
+    return Container(
+      padding: EdgeInsets.all(8),
+      width: 130.w,
+      height: 80.h,
+      child: TextField(
+        cursorColor: Theme.of(context).primaryColor,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.r),
+            borderSide: const BorderSide(color: ColorManager.darkPrimary),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.r),
+            borderSide: const BorderSide(color: ColorManager.darkPrimary),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.r),
+            borderSide: const BorderSide(color: ColorManager.darkPrimary),
+          ),
+          hintText: 'search here.',
+          fillColor: ColorManager.textColor,
+          hintStyle: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.normal,
+            color: const Color.fromRGBO(6, 0, 79, 0.6),
+          ),
         ),
       ),
     );

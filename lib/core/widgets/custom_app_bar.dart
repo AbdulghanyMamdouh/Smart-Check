@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:smart_check/core/theme/color_manager.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key, required this.title});
+  const CustomAppBar({super.key, required this.title, required this.width});
   final String title;
+  final double width;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 200.w,
+      width: width,
       child: Stack(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [

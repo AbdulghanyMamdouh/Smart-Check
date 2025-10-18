@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomAppBar(title: 'SmartCheck'),
+            CustomAppBar(title: 'SmartCheck', width: 200.w),
             SizedBox(height: 100.h),
             Text(
               'Welcome to SmartCheck',
