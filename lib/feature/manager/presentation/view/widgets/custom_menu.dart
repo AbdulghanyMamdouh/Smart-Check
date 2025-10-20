@@ -20,6 +20,11 @@ class _CustomMenuState extends State<CustomMenu> {
       value: selectedValue,
       isExpanded: true,
       underline: SizedBox(),
+      style: Theme.of(
+        context,
+      ).textTheme.titleMedium!.copyWith(color: ColorManager.white),
+
+      dropdownColor: ColorManager.darkPrimary,
       borderRadius: BorderRadius.circular(16.r),
       hint: Text(
         'Select Branch Name',

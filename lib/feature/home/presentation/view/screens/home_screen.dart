@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/widgets/custom_app_bar.dart';
 import 'package:smart_check/core/widgets/search_text_field.dart';
+import 'package:smart_check/feature/home/presentation/view/widget/custom_bottom_nav_bar.dart';
 import 'package:smart_check/feature/home/presentation/view/widget/custom_tab.dart';
-import 'package:smart_check/feature/manager/presentation/view/screens/manager_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: ColorManager.blueGrey,
       body: Container(
         padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 25.h),
         child: Column(
@@ -40,25 +41,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-
-      floatingActionButton: Container(
-        decoration: BoxDecoration(
-          color: ColorManager.darkPrimary,
-
-          borderRadius: BorderRadius.circular(46.r),
-        ),
-        child: IconButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed(ManagerScreen.routeName);
-          },
-          icon: Icon(
-            Icons.manage_accounts,
-            size: 52.sp,
-            color: ColorManager.primary,
-          ),
-        ),
-      ),
+      bottomNavigationBar: customBottomNavigationBar(context: context),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/feature/auth/presentation/view/login_screen.dart';
 import 'package:smart_check/feature/home/presentation/view/screens/home_screen.dart';
 import 'package:smart_check/feature/manager/presentation/view/screens/manager_screen.dart';
+import 'package:smart_check/feature/statistics/presentation/view/screens/statistic_screen.dart';
 
 class SmartCheckApp extends StatelessWidget {
   const SmartCheckApp({super.key});
@@ -18,6 +19,7 @@ class SmartCheckApp extends StatelessWidget {
           LoginScreen.routName: (_) => LoginScreen(),
           HomeScreen.routeName: (_) => HomeScreen(),
           ManagerScreen.routeName: (_) => ManagerScreen(),
+          StatisticScreen.routeName: (_) => StatisticScreen(),
         },
         initialRoute: HomeScreen.routeName,
       ),

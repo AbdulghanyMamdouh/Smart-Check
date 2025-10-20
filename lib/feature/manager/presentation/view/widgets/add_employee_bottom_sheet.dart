@@ -26,7 +26,11 @@ class AddEmployeeBottomSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppBar(title: 'Add New Employee', width: 300.w),
-
+            DefaultTextField(
+              controller: TextEditingController(),
+              label: 'Enter User Name',
+            ),
+            SizedBox(height: 16.h),
             DefaultTextField(
               controller: TextEditingController(),
               label: 'Enter Email Address',

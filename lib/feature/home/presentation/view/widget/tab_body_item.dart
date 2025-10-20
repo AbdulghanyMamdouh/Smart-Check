@@ -12,15 +12,42 @@ class TabBodyItem extends StatelessWidget {
       margin: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 10),
 
       decoration: BoxDecoration(
+        color: ColorManager.darkPrimary,
+        boxShadow: [
+          BoxShadow(
+            blurStyle: BlurStyle.inner,
+            color: Colors.red,
+            blurRadius: 5,
+            spreadRadius: 0,
+            offset: Offset(-3, 4),
+          ),
+        ],
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: ColorManager.darkPrimary, width: 2.w),
+
+        border: Border.all(color: ColorManager.white, width: 2.w),
       ),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Name: ahmed'),
-          Text('price: 250 EGP'),
-          Text(branchName),
+          Text(
+            'Name: ahmed',
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium!.copyWith(color: ColorManager.white),
+          ),
+          Text(
+            'price: 250 EGP',
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium!.copyWith(color: ColorManager.white),
+          ),
+          Text(
+            branchName,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium!.copyWith(color: ColorManager.white),
+          ),
         ],
       ),
     );

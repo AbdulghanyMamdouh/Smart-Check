@@ -10,7 +10,7 @@ class SearchTextField extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(8),
       width: 130.w,
-      height: 80.h,
+      height: 65.h,
       child: TextField(
         cursorColor: Theme.of(context).primaryColor,
         decoration: InputDecoration(
