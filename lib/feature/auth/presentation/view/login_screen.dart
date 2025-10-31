@@ -7,7 +7,7 @@ import 'package:smart_check/core/widgets/default_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-  static const String routName = 'login';
+  static const String routeName = 'login';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

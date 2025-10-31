@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/widgets/custom_app_bar.dart';
 import 'package:smart_check/core/widgets/search_text_field.dart';
-import 'package:smart_check/feature/home/presentation/view/widget/custom_bottom_nav_bar.dart';
-import 'package:smart_check/feature/home/presentation/view/widget/custom_tab.dart';
+import 'package:smart_check/feature/admin/home/presentation/view/widget/custom_bottom_nav_bar.dart';
+import 'package:smart_check/feature/admin/home/presentation/view/widget/custom_tab.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

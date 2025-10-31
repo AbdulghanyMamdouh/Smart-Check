@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/widgets/custom_app_bar.dart';
-import 'package:smart_check/feature/manager/presentation/view/widgets/add_employee_bottom_sheet.dart';
-import 'package:smart_check/feature/manager/presentation/view/widgets/employee_item.dart';
+import 'package:smart_check/feature/admin/manager/presentation/view/widgets/add_employee_bottom_sheet.dart';
+import 'package:smart_check/feature/admin/manager/presentation/view/widgets/employee_item.dart';
 
 class ManagerScreen extends StatelessWidget {
   const ManagerScreen({super.key});

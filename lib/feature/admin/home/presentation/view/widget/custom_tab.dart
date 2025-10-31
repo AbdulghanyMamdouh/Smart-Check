@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_check/feature/home/presentation/view/widget/tab_body.dart';
-import 'package:smart_check/feature/home/presentation/view/widget/tab_item.dart';
+import 'package:smart_check/feature/admin/home/presentation/view/widget/tab_body.dart';
+import 'package:smart_check/feature/admin/home/presentation/view/widget/tab_item.dart';
 
 class CustomTab extends StatefulWidget {
   const CustomTab({super.key});

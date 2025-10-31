@@ -4,7 +4,7 @@ import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/widgets/custom_app_bar.dart';
 import 'package:smart_check/core/widgets/default_button.dart';
 import 'package:smart_check/core/widgets/default_text_field.dart';
-import 'package:smart_check/feature/manager/presentation/view/widgets/custom_menu.dart';
+import 'package:smart_check/feature/admin/manager/presentation/view/widgets/custom_menu.dart';
 
 class AddEmployeeBottomSheet extends StatelessWidget {
   const AddEmployeeBottomSheet({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/widgets/custom_app_bar.dart';
-import 'package:smart_check/feature/statistics/presentation/view/widgets/statistics_item.dart';
+import 'package:smart_check/feature/admin/statistics/presentation/view/widgets/statistics_item.dart';
 
 class StatisticScreen extends StatelessWidget {
   const StatisticScreen({super.key});

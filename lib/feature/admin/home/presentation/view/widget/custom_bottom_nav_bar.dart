@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
-import 'package:smart_check/feature/home/presentation/view/widget/nav_bar_icon.dart';
-import 'package:smart_check/feature/manager/presentation/view/screens/manager_screen.dart';
-import 'package:smart_check/feature/statistics/presentation/view/screens/statistic_screen.dart';
+import 'package:smart_check/feature/admin/home/presentation/view/widget/nav_bar_icon.dart';
+import 'package:smart_check/feature/admin/manager/presentation/view/screens/manager_screen.dart';
+import 'package:smart_check/feature/admin/statistics/presentation/view/screens/statistic_screen.dart';
 
 Widget customBottomNavigationBar({required BuildContext context}) {
   return ClipRRect(

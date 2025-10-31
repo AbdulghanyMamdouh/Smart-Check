@@ -7,7 +7,7 @@ class ThemeManager {
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.blue,
       surfaceTintColor: Colors.transparent,
       foregroundColor: ColorManager.primary,
       titleTextStyle: TextStyle(

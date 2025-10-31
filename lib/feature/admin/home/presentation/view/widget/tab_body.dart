@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_check/feature/home/presentation/view/widget/tab_body_item.dart';
+import 'package:smart_check/feature/admin/home/presentation/view/widget/tab_body_item.dart';
 
 class TabBody extends StatelessWidget {
   const TabBody({super.key, required this.branchName});
