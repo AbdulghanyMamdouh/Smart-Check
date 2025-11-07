@@ -20,7 +20,7 @@ class NavBarIcon extends StatelessWidget {
         icon,
         size: 42.sp,
 
-        color: isSelected ? Theme.of(context).primaryColor : ColorManager.white,
+        color: ColorManager.white,
       ),
     );
   }

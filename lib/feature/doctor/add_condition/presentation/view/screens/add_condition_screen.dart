@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/widgets/default_button.dart';
-import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/additional_program_section.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/chiken_section.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/client_section.dart';
 

@@ -10,38 +10,41 @@ class CustomMenu extends StatefulWidget {
 }
 
 class _CustomMenuState extends State<CustomMenu> {
-  final List<String> items = ['Movies', 'Sports', 'Musics'];
+  final List<String> items = ['مدينة السادات', 'النوبارية', 'دمنهور'];
 
   String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-      value: selectedValue,
-      isExpanded: true,
-      underline: SizedBox(),
-      style: Theme.of(
-        context,
-      ).textTheme.titleMedium!.copyWith(color: ColorManager.white),
-
-      dropdownColor: ColorManager.darkPrimary,
-      borderRadius: BorderRadius.circular(16.r),
-      hint: Text(
-        'Select Branch Name',
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 22.0),
+      child: DropdownButton(
+        value: selectedValue,
+        isExpanded: true,
+        underline: SizedBox(),
         style: Theme.of(
           context,
-        ).textTheme.titleMedium!.copyWith(color: ColorManager.darkPrimary),
+        ).textTheme.titleMedium!.copyWith(color: ColorManager.white),
+
+        dropdownColor: ColorManager.darkPrimary,
+        borderRadius: BorderRadius.circular(16.r),
+        hint: Text(
+          'اختر الفرع',
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium!.copyWith(color: ColorManager.darkPrimary),
+        ),
+        items: items
+            .map(
+              (category) =>
+                  DropdownMenuItem(value: category, child: Text(category)),
+            )
+            .toList(),
+        onChanged: (newValue) {
+          selectedValue = newValue;
+          setState(() {});
+        },
       ),
-      items: items
-          .map(
-            (category) =>
-                DropdownMenuItem(value: category, child: Text(category)),
-          )
-          .toList(),
-      onChanged: (newValue) {
-        selectedValue = newValue;
-        setState(() {});
-      },
     );
   }
 }

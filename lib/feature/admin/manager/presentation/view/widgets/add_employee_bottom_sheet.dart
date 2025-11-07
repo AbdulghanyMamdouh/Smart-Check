@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
-import 'package:smart_check/core/widgets/custom_app_bar.dart';
 import 'package:smart_check/core/widgets/default_button.dart';
 import 'package:smart_check/core/widgets/default_text_field.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view/widgets/custom_menu.dart';
@@ -23,22 +22,28 @@ class AddEmployeeBottomSheet extends StatelessWidget {
           ),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+
           children: [
-            CustomAppBar(title: 'Add New Employee', width: 300.w),
-            DefaultTextField(
-              controller: TextEditingController(),
-              label: 'Enter User Name',
+            SizedBox(height: 16.h),
+            Text(
+              'إضافة موظف جديد',
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w700,
+                color: ColorManager.darkPrimary,
+              ),
             ),
             SizedBox(height: 16.h),
             DefaultTextField(
               controller: TextEditingController(),
-              label: 'Enter Email Address',
+              label: 'ادخل اسم الموظف',
             ),
+
             SizedBox(height: 16.h),
             DefaultTextField(
               controller: TextEditingController(),
-              label: 'Enter Password',
+              label: 'ادخل كلمة المرور',
             ),
             SizedBox(height: 8.h),
 
@@ -47,7 +52,7 @@ class AddEmployeeBottomSheet extends StatelessWidget {
 
             DefaultButton(
               icon: Icon(Icons.arrow_forward),
-              label: 'Add Employee',
+              label: 'إضافة الموظف',
               onPressed: () {},
             ),
             SizedBox(height: 8.h),
