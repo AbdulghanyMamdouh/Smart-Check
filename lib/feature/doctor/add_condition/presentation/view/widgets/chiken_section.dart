@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/client_text_field_item.dart';
+import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/doctor_text_field_item.dart';
 
 class ChikenSection extends StatelessWidget {
   const ChikenSection({super.key});
@@ -130,6 +131,13 @@ class ChikenSection extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          SizedBox(
+            height: 4.h,
+          ),
+          DoctorTextFieldItem(
+            labelText: 'الشكوي',
+            controller: TextEditingController(),
           ),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
-  static const Color primary = Color.fromARGB(255, 253, 3, 3);
+  static const Color primary = Color.fromARGB(255, 36, 167, 167);
   static const Color darkPrimary = Color(0xFF004182);
   static const Color white = Color(0xFFFFFFFF);
   static const Color red = Color.fromARGB(255, 253, 3, 3);

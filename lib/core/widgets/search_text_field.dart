@@ -9,29 +9,29 @@ class SearchTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(8),
-      width: 130.w,
-      height: 65.h,
+      height: 70.h,
+      width: 105.w,
       child: TextField(
+        maxLength: 5,
+
         cursorColor: Theme.of(context).primaryColor,
         decoration: InputDecoration(
+          counterText: '',
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25.r),
-            borderSide: const BorderSide(color: ColorManager.darkPrimary),
+            borderSide: BorderSide(color: ColorManager.white),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25.r),
-            borderSide: const BorderSide(color: ColorManager.darkPrimary),
+            borderSide: BorderSide(color: ColorManager.white),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25.r),
-            borderSide: const BorderSide(color: ColorManager.darkPrimary),
+            borderSide: BorderSide(color: ColorManager.white),
           ),
-          hintText: 'search here.',
-          fillColor: ColorManager.textColor,
+          hintText: 'الكود..؟',
+          fillColor: ColorManager.white,
           hintStyle: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.normal,
-            color: const Color.fromRGBO(6, 0, 79, 0.6),
+            color: ColorManager.white,
           ),
         ),
       ),
