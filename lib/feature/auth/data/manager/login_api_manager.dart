@@ -29,7 +29,7 @@ class LoginApiManager {
           ApiConstatnt.adminLogin,
           data: loginRequest.toJson(),
         );
-        if (response.statusCode! >= 200 || response.statusCode! < 300) {
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
           final loginResponse = LoginResponse.fromJson(response.data);
           return Right(loginResponse);
         } else {
@@ -70,7 +70,7 @@ class LoginApiManager {
           ApiConstatnt.employeeLogin,
           data: loginRequest.toJson(),
         );
-        if (response.statusCode! >= 200 || response.statusCode! < 300) {
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
           final loginResponse = LoginResponse.fromJson(response.data);
           return Right(loginResponse);
         } else {
