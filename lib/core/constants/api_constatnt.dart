@@ -1,4 +1,4 @@
-class ApiConstatnt {
+class ApiConstant {
   static const String baseURL = '';
   static const String adminLogin = '';
   static const String employeeLogin = '';

@@ -26,7 +26,7 @@ class LoginApiManager {
     if (connected) {
       try {
         final response = await dio.post(
-          ApiConstatnt.adminLogin,
+          ApiConstant.adminLogin,
           data: loginRequest.toJson(),
         );
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
@@ -67,7 +67,7 @@ class LoginApiManager {
     if (connected) {
       try {
         final response = await dio.post(
-          ApiConstatnt.employeeLogin,
+          ApiConstant.employeeLogin,
           data: loginRequest.toJson(),
         );
         if (response.statusCode! >= 200 && response.statusCode! < 300) {

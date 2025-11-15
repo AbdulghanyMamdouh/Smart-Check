@@ -28,7 +28,7 @@ class HomeApiManager {
       );
       try {
         final response = await dio.put(
-          ApiConstatnt.updateExamination,
+          ApiConstant.updateExamination,
           data: examinationReuest.toJson(),
         );
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
@@ -63,7 +63,7 @@ class HomeApiManager {
     if (connected) {
       try {
         final response = await dio.put(
-          ApiConstatnt.completeExamination,
+          ApiConstant.completeExamination,
           data: examination.toJson(),
         );
         if (response.statusCode! >= 200 && response.statusCode! < 300) {

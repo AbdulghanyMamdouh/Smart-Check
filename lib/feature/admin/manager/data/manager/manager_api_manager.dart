@@ -3,28 +3,35 @@ import 'package:dio/dio.dart';
 import 'package:smart_check/core/constants/api_constatnt.dart';
 import 'package:smart_check/core/di/di.dart';
 import 'package:smart_check/core/utils/failure.dart';
-import 'package:smart_check/feature/doctor/add_condition/data/models/add_examination_request_dto.dart';
+import 'package:smart_check/feature/admin/manager/data/models/add_employee_request_dto.dart';
 
-class AddExaminationApiManager {
-  AddExaminationApiManager._();
-  static AddExaminationApiManager? _instance;
-  static AddExaminationApiManager getInstance() {
-    _instance ??= AddExaminationApiManager._();
+class ManagerApiManager {
+  ManagerApiManager._();
+  static ManagerApiManager? _instance;
+  static ManagerApiManager getInstance() {
+    _instance ?? ManagerApiManager._();
     return _instance!;
   }
 
-  Future<Either<Failures, String>> addExamination(
-    AddExaminationRequestDto examination,
-  ) async {
+  Future<Either<Failures, String>> addEmployee({
+    required String userName,
+    required String branchName,
+    required String password,
+  }) async {
     bool connected = await isConnected();
     if (connected) {
       try {
+        final request = AddEmployeeRequestDto(
+          branchName: branchName,
+          password: password,
+          userName: userName,
+        );
         final response = await dio.post(
-          ApiConstant.addExamination,
-          data: examination.toJson(),
+          ApiConstant.addEmployee,
+          data: request.toJson(),
         );
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
-          return Right('تم تسجيل الحالة بنجاح');
+          return Right('..تمت إضافة دكتور جديد بنجاح');
         } else {
           return Left(
             ServerError(

@@ -17,7 +17,7 @@ Future<bool> isConnected() async {
 final dio =
     Dio(
         BaseOptions(
-          baseUrl: ApiConstatnt.baseURL,
+          baseUrl: ApiConstant.baseURL,
           receiveDataWhenStatusError: true,
           connectTimeout: const Duration(seconds: 10),
           receiveTimeout: const Duration(seconds: 10),
