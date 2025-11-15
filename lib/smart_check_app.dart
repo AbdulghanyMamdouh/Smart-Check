@@ -36,7 +36,7 @@ class SmartCheckApp extends StatelessWidget {
           FragmentScreen.routeName: (_) => FragmentScreen(),
           LoginEmpScreen.routeName: (_) => LoginEmpScreen(),
         },
-        initialRoute: FragmentScreen.routeName,
+        initialRoute: DoctorHomeScreen.routeName,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

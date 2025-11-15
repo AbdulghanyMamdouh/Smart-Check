@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/screens/condition_details_screen.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/widgets/complete_adding_condition_bottom_sheet.dart';
 
 class ConditionItem extends StatelessWidget {
   const ConditionItem({super.key, required this.branchName});
@@ -10,10 +9,6 @@ class ConditionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onLongPress: () => showModalBottomSheet(
-        context: context,
-        builder: (_) => CompleteAddingConditionBottomSheet(),
-      ),
       onTap: () =>
           Navigator.of(context).pushNamed(ConditionDetailsScreen.routeName),
       child: Container(
