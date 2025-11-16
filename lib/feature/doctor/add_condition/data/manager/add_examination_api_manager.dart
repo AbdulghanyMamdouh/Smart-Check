@@ -38,6 +38,8 @@ class AddExaminationApiManager {
             errorMessage: error.message ?? error.toString(),
           ),
         );
+      } catch (e) {
+        return Left(ServerError(errorMessage: e.toString()));
       }
     } else {
       return Left(

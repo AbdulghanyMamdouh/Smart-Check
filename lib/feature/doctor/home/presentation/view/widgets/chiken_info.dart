@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/information_chiken_item.dart';
 
+// ignore: must_be_immutable
 class ChikenInfo extends StatelessWidget {
-  const ChikenInfo({super.key});
-
+  ChikenInfo({super.key, required this.examinationEntity});
+  ExaminationEntity examinationEntity;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,19 +56,19 @@ class ChikenInfo extends StatelessWidget {
               Flexible(
                 child: InformationChikenItem(
                   labelText: 'السلالة',
-                  hintText: 'hes23',
+                  hintText: examinationEntity.herdType ?? 'hes23',
                 ),
               ),
               Expanded(
                 child: InformationChikenItem(
                   labelText: 'العدد',
-                  hintText: '2500',
+                  hintText: '${examinationEntity.herdCount ?? 88}',
                 ),
               ),
               Flexible(
                 child: InformationChikenItem(
                   labelText: 'النافق',
-                  hintText: '23',
+                  hintText: '${examinationEntity.herdDied ?? 21}',
                 ),
               ),
             ],
@@ -81,19 +83,19 @@ class ChikenInfo extends StatelessWidget {
               Flexible(
                 child: InformationChikenItem(
                   labelText: 'العلف',
-                  hintText: '45',
+                  hintText: '${examinationEntity.herdFeedPerDay ?? 32}',
                 ),
               ),
               Expanded(
                 child: InformationChikenItem(
                   labelText: 'المياه',
-                  hintText: '220',
+                  hintText: '${examinationEntity.herdWaterPerDay ?? 45}',
                 ),
               ),
               Flexible(
                 child: InformationChikenItem(
                   labelText: 'العمر',
-                  hintText: '15',
+                  hintText: '${examinationEntity.herdAgeInDays ?? 21}',
                 ),
               ),
             ],

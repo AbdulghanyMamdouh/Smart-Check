@@ -9,9 +9,9 @@ class HomeViewModel extends Cubit<HomeState> {
   var clientCode = TextEditingController();
   DateTime dateTime = DateTime.now();
   var formKey = GlobalKey<FormState>();
-  HomeViewModel(
-    this.homeUseCase,
-  ) : super(HomeInitialState());
+  HomeViewModel({
+    required this.homeUseCase,
+  }) : super(HomeInitialState());
   Future<void> getExaminationsByClientID() async {
     emit(GetExByClIDLoading());
     final either = await homeUseCase.getExaminationsByClientId(

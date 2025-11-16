@@ -5,9 +5,9 @@ import 'package:smart_check/feature/doctor/add_condition/domain/use_case/add_exa
 import 'package:smart_check/feature/doctor/add_condition/presentation/view_model/add_examination_states.dart';
 
 class AddExaminationViewModel extends Cubit<AddExaminationStates> {
-  AddExaminationViewModel(
-    this.addExaminationUseCase,
-  ) : super(AddExaminationInitialState());
+  AddExaminationViewModel({
+    required this.addExaminationUseCase,
+  }) : super(AddExaminationInitialState());
 
   final clientName = TextEditingController();
   final clientPhone = TextEditingController();
@@ -54,22 +54,28 @@ class AddExaminationViewModel extends Cubit<AddExaminationStates> {
             herdType: herdType.text.trim(),
             herdWaterPerDay: herdWaterPerDay.text.trim(),
           );
-      var either = await addExaminationUseCase.addExamination(
-        examinationRequest: examinationRequest,
-      );
-      either.fold(
-        (failure) {
-          emit(
-            AddExaminationError(errMsg: failure.errorMessage!),
-          );
-        },
-        (sucMsg) {
-          emit(
-            AddExaminationSuccess(sucMsg: sucMsg),
-          );
-          clearInputs();
-        },
-      );
+      try {
+        var either = await addExaminationUseCase.addExamination(
+          examinationRequest: examinationRequest,
+        );
+        either.fold(
+          (failure) {
+            emit(
+              AddExaminationError(errMsg: failure.errorMessage!),
+            );
+          },
+          (sucMsg) {
+            emit(
+              AddExaminationSuccess(sucMsg: sucMsg),
+            );
+            clearInputs();
+          },
+        );
+      } catch (err) {
+        emit(
+          AddExaminationError(errMsg: err.toString()),
+        );
+      }
     }
   }
 

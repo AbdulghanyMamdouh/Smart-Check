@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/doctor_text_field_item.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
 
 class CareProgramSection extends StatelessWidget {
   const CareProgramSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<DoctorHomeViewModel>();
+
     return Container(
       padding: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
@@ -51,7 +55,8 @@ class CareProgramSection extends StatelessWidget {
               Flexible(
                 child: DoctorTextFieldItem(
                   labelText: 'آخر مضاد حيوي',
-                  controller: TextEditingController(),
+                  controller: viewModel.lastAntibiotic,
+
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter some text';
@@ -63,7 +68,7 @@ class CareProgramSection extends StatelessWidget {
               Flexible(
                 child: DoctorTextFieldItem(
                   labelText: 'برنامج التحصين',
-                  controller: TextEditingController(),
+                  controller: viewModel.immunisationProgram,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter some text';

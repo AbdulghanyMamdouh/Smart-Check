@@ -8,42 +8,47 @@ class InformationCareItem extends StatelessWidget {
     super.key,
     required this.labelText,
     required this.hintText,
+    required this.onLongPress,
   });
   final String labelText;
   final String hintText;
+  final void Function()? onLongPress;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 4.h,
-      children: [
-        Text(
-          labelText,
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: ColorManager.greyColor,
-              width: 1.w,
-            ),
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-          child: Text(
-            textAlign: TextAlign.center,
-            hintText,
+    return GestureDetector(
+      onLongPress: onLongPress,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 4.h,
+        children: [
+          Text(
+            labelText,
             style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w700,
             ),
           ),
-        ),
-      ],
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: ColorManager.greyColor,
+                width: 1.w,
+              ),
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            child: Text(
+              textAlign: TextAlign.center,
+              hintText,
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

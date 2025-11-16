@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
+import 'package:smart_check/core/utils/validator.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/client_text_field_item.dart';
+import 'package:smart_check/feature/doctor/add_condition/presentation/view_model/add_examination_view_model.dart';
 
 class ClientSection extends StatelessWidget {
-  const ClientSection({super.key});
-
+  const ClientSection({
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<AddExaminationViewModel>();
     return Container(
       width: double.infinity,
 
@@ -54,10 +59,11 @@ class ClientSection extends StatelessWidget {
               Flexible(
                 child: ClientTextFieldItem(
                   labelText: 'اسم العميل',
-                  controller: TextEditingController(),
+                  controller: viewModel.clientName,
+
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'من فضلك ادخل اسم العميل';
                     }
                     return null;
                   },
@@ -66,10 +72,11 @@ class ClientSection extends StatelessWidget {
               Expanded(
                 child: ClientTextFieldItem(
                   labelText: ' رقم الهاتف',
-                  controller: TextEditingController(),
+                  controller: viewModel.clientPhone,
+                  keyboardType: TextInputType.number,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                    if (!Validator.isPhoneEg(value)) {
+                      return 'يقبل فقط الارقام المصرية';
                     }
                     return null;
                   },
@@ -87,10 +94,10 @@ class ClientSection extends StatelessWidget {
                 flex: 5,
                 child: ClientTextFieldItem(
                   labelText: 'العنوان',
-                  controller: TextEditingController(),
+                  controller: viewModel.clientAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'من فضلك ادخل العنوان';
                     }
                     return null;
                   },
@@ -100,10 +107,11 @@ class ClientSection extends StatelessWidget {
                 flex: 3,
                 child: ClientTextFieldItem(
                   labelText: 'كود العميل',
-                  controller: TextEditingController(),
+                  keyboardType: TextInputType.number,
+                  controller: viewModel.clientCode,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'من فضلك ادخل كود العميل';
                     }
                     return null;
                   },

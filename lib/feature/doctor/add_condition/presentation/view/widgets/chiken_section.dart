@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/client_text_field_item.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/doctor_text_field_item.dart';
+import 'package:smart_check/feature/doctor/add_condition/presentation/view_model/add_examination_view_model.dart';
 
 class ChikenSection extends StatelessWidget {
-  const ChikenSection({super.key});
-
+  const ChikenSection({
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<AddExaminationViewModel>();
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(8.w),
@@ -52,10 +57,10 @@ class ChikenSection extends StatelessWidget {
               Flexible(
                 child: ClientTextFieldItem(
                   labelText: 'النوع',
-                  controller: TextEditingController(),
+                  controller: viewModel.herdType,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'من فضلك ادخل نوع القطيع';
                     }
                     return null;
                   },
@@ -64,10 +69,11 @@ class ChikenSection extends StatelessWidget {
               Expanded(
                 child: ClientTextFieldItem(
                   labelText: 'العمر بالايام',
-                  controller: TextEditingController(),
+                  controller: viewModel.herdAgeInDays,
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'من فضلك ادخل عمر القطيع بالأيام';
                     }
                     return null;
                   },
@@ -76,10 +82,11 @@ class ChikenSection extends StatelessWidget {
               Flexible(
                 child: ClientTextFieldItem(
                   labelText: 'العدد',
-                  controller: TextEditingController(),
+                  controller: viewModel.herdCount,
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'من فضلك ادخل عدد القطيع';
                     }
                     return null;
                   },
@@ -97,10 +104,11 @@ class ChikenSection extends StatelessWidget {
               Flexible(
                 child: ClientTextFieldItem(
                   labelText: 'العلف',
-                  controller: TextEditingController(),
+                  keyboardType: TextInputType.number,
+                  controller: viewModel.herdFeedPerDay,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'من فضلك ادخل كمية العلف لكل يوم';
                     }
                     return null;
                   },
@@ -109,10 +117,11 @@ class ChikenSection extends StatelessWidget {
               Expanded(
                 child: ClientTextFieldItem(
                   labelText: 'المياه',
-                  controller: TextEditingController(),
+                  controller: viewModel.herdWaterPerDay,
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'من فضلك ادخل كمية المياه لكل يوم';
                     }
                     return null;
                   },
@@ -121,10 +130,11 @@ class ChikenSection extends StatelessWidget {
               Flexible(
                 child: ClientTextFieldItem(
                   labelText: 'النافق',
-                  controller: TextEditingController(),
+                  controller: viewModel.herdDied,
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'من فضلك ادخل عددالنافق';
                     }
                     return null;
                   },
@@ -137,7 +147,14 @@ class ChikenSection extends StatelessWidget {
           ),
           DoctorTextFieldItem(
             labelText: 'الشكوي',
-            controller: TextEditingController(),
+            keyboardType: TextInputType.multiline,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'من فضلك اكتب الشكوى أو المشكلة';
+              }
+              return null;
+            },
+            controller: viewModel.compliant,
           ),
         ],
       ),

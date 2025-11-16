@@ -8,21 +8,23 @@ class ClientTextFieldItem extends StatelessWidget {
     super.key,
     required this.labelText,
     required this.validator,
+    this.keyboardType = TextInputType.text,
     required this.controller,
   });
   final String labelText;
   final String? Function(String?)? validator;
+  final TextInputType keyboardType;
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 60.h,
-
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         style: TextStyle(
           color: ColorManager.black,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
         ),
         validator: validator,
         controller: controller,
@@ -75,6 +77,7 @@ class ClientTextFieldItem extends StatelessWidget {
             borderRadius: BorderRadius.all(
               Radius.circular(16.r),
             ),
+            gapPadding: 8.h,
             borderSide: BorderSide(
               color: ColorManager.red,
               width: 2.w,

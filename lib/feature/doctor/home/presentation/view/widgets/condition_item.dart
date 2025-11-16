@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
+import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/screens/condition_details_screen.dart';
 
 class ConditionItem extends StatelessWidget {
-  const ConditionItem({super.key, required this.branchName});
-  final String branchName;
+  const ConditionItem({super.key, required this.examinationEntity});
+  final ExaminationEntity examinationEntity;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>
-          Navigator.of(context).pushNamed(ConditionDetailsScreen.routeName),
+      onTap: () => Navigator.of(context).pushNamed(
+        ConditionDetailsScreen.routeName,
+        arguments: examinationEntity,
+      ),
       child: Container(
         padding: EdgeInsets.all(10),
         margin: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 10),
@@ -45,13 +48,13 @@ class ConditionItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'امين صبري عفيفي',
+                  examinationEntity.clientName ?? 'امين صبري عفيفي',
                   style: Theme.of(
                     context,
                   ).textTheme.titleMedium!.copyWith(color: ColorManager.black),
                 ),
                 Text(
-                  'الوفائية البحيرة',
+                  examinationEntity.clientAddress ?? 'الوفائية البحيرة',
                   style: Theme.of(
                     context,
                   ).textTheme.titleMedium!.copyWith(color: ColorManager.black),
@@ -60,7 +63,8 @@ class ConditionItem extends StatelessWidget {
             ),
 
             Text(
-              """
+              examinationEntity.diagnosis ??
+                  """
     
     التشخيص او شي مميز 
     

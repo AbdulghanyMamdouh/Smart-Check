@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
+import 'package:smart_check/core/utils/custom_dialog.dart';
 import 'package:smart_check/core/widgets/default_button.dart';
-import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/additional_program_section.dart';
-import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/care_program_section.dart';
+import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view/widgets/additional_program_section.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view/widgets/care_info.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view/widgets/care_program_section.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/chiken_info.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_state.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
 
 class ConditionDetailsScreen extends StatelessWidget {
   const ConditionDetailsScreen({super.key});
   static const String routeName = 'con_det';
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<DoctorHomeViewModel>();
+
+    var examination =
+        ModalRoute.of(context)?.settings.arguments as ExaminationEntity;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(226, 55, 145, 228),
@@ -33,47 +43,100 @@ class ConditionDetailsScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        width: double.infinity,
+      body: examination.isCompleted ?? false
+          ? Container(
+              width: double.infinity,
 
-        padding: EdgeInsets.all(8.w),
-        margin: EdgeInsets.all(10.w),
-        decoration: BoxDecoration(
-          // color: Colors.white,
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 192, 247, 247),
-              Colors.white,
-            ],
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-          ),
-          borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(
-            width: 2.w,
-            color: ColorManager.darkPrimary,
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            spacing: 10.h,
-            children: [
-              ChikenInfo(),
-              // SizedBox(
-              //   height: 10.h,
-              // ),
-              CareProgramSection(),
-              AdditionalProgramSection(),
-              DefaultButton(
-                icon: Icon(Icons.arrow_forward),
-                label: 'اكمال تسجيل الحالة',
-                onPressed: () {},
+              padding: EdgeInsets.all(8.w),
+              margin: EdgeInsets.all(10.w),
+              decoration: BoxDecoration(
+                // color: Colors.white,
+                gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 192, 247, 247),
+                    Colors.white,
+                  ],
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                ),
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(
+                  width: 2.w,
+                  color: ColorManager.darkPrimary,
+                ),
               ),
-              SizedBox(height: 8.h),
-            ],
-          ),
-        ),
-      ),
+              child: SingleChildScrollView(
+                child: Column(
+                  spacing: 10.h,
+                  children: [
+                    ChikenInfo(
+                      examinationEntity: examination,
+                    ),
+                    CareInfo(
+                      examinationEntity: examination,
+                    ),
+                    SizedBox(height: 8.h),
+                  ],
+                ),
+              ),
+            )
+          : Container(
+              width: double.infinity,
+
+              padding: EdgeInsets.all(8.w),
+              margin: EdgeInsets.all(10.w),
+              decoration: BoxDecoration(
+                // color: Colors.white,
+                gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 192, 247, 247),
+                    Colors.white,
+                  ],
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                ),
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(
+                  width: 2.w,
+                  color: ColorManager.darkPrimary,
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: viewModel.formKey,
+                  child: Column(
+                    spacing: 20.h,
+                    children: [
+                      CareProgramSection(),
+                      AdditionalProgramSection(),
+                      BlocListener<DoctorHomeViewModel, DoctorHomeState>(
+                        listener: (context, state) {
+                          if (state is HomeCompleteExaminationLoading) {
+                            CustomDialog.showLoading(context);
+                          } else if (state is HomeCompleteExaminationError) {
+                            CustomDialog.hideLoading(context);
+                            CustomDialog.showMessage(state.errMsg);
+                          } else if (state is HomeCompleteExaminationSuccess) {
+                            CustomDialog.hideLoading(context);
+                            CustomDialog.showMessage(state.sucMsg);
+                            Navigator.of(context).pop();
+                          }
+                        },
+                        child: DefaultButton(
+                          icon: Icon(Icons.arrow_forward),
+                          label: 'اكمال تسجيل الحالة',
+                          onPressed: () {
+                            viewModel.examinationId = examination.id;
+                            viewModel.completeExamination();
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                    ],
+                  ),
+                ),
+              ),
+            ),
     );
   }
 }

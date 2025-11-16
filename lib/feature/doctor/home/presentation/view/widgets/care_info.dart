@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/information_care_item.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view/widgets/update_examination_bottom_sheet.dart';
 
+// ignore: must_be_immutable
 class CareInfo extends StatelessWidget {
-  const CareInfo({super.key});
-
+  CareInfo({super.key, required this.examinationEntity});
+  ExaminationEntity examinationEntity;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-
       padding: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
         // color: Colors.white,
@@ -29,7 +31,7 @@ class CareInfo extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 8.h,
+        spacing: 16.h,
         children: [
           Row(
             spacing: 4.w,
@@ -47,31 +49,113 @@ class CareInfo extends StatelessWidget {
               ),
             ],
           ),
-
+          InformationCareItem(
+            labelText: 'الشكوي',
+            hintText:
+                examinationEntity.compliant ??
+                'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
+            onLongPress: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => UpdateExaminationBottomSheet(
+                  examinationId: examinationEntity.id,
+                  keyString: 'compliant',
+                  value:
+                      examinationEntity.compliant ??
+                      'hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen',
+                ),
+              );
+            },
+          ),
           InformationCareItem(
             labelText: 'التشريح',
             hintText:
+                examinationEntity.anatomy ??
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
+            onLongPress: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => UpdateExaminationBottomSheet(
+                  examinationId: examinationEntity.id,
+                  keyString: 'anatomy',
+                  value:
+                      examinationEntity.anatomy ??
+                      'hai eiejr owo whr rje ejejw wje jeen',
+                ),
+              );
+            },
           ),
           InformationCareItem(
             labelText: 'التشخيص',
             hintText:
+                examinationEntity.diagnosis ??
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
+            onLongPress: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => UpdateExaminationBottomSheet(
+                  examinationId: examinationEntity.id,
+                  keyString: 'diagnosis',
+                  value:
+                      examinationEntity.diagnosis ??
+                      'hai eiejr owo whr rje ejejw wje jeen',
+                ),
+              );
+            },
           ),
           InformationCareItem(
             labelText: 'برنامج التحصين',
             hintText:
+                examinationEntity.immunisationProgram ??
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
+            onLongPress: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => UpdateExaminationBottomSheet(
+                  examinationId: examinationEntity.id,
+                  keyString: 'immunisationProgram',
+                  value:
+                      examinationEntity.immunisationProgram ??
+                      'hai eiejr owo whr rje ejejw wje jeen',
+                ),
+              );
+            },
           ),
           InformationCareItem(
             labelText: 'المضاد الحيوي',
             hintText:
+                examinationEntity.lastAntibiotic ??
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
+            onLongPress: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => UpdateExaminationBottomSheet(
+                  examinationId: examinationEntity.id,
+                  keyString: 'lastAntibiotic',
+                  value:
+                      examinationEntity.lastAntibiotic ??
+                      'hai eiejr owo whr rje ejejw wje jeen',
+                ),
+              );
+            },
           ),
           InformationCareItem(
             labelText: 'البرنامج العلاجي',
             hintText:
+                examinationEntity.treatment ??
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
+            onLongPress: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => UpdateExaminationBottomSheet(
+                  examinationId: examinationEntity.id,
+                  keyString: 'treatment',
+                  value:
+                      examinationEntity.treatment ??
+                      'hai eiejr owo whr rje ejejw wje jeen',
+                ),
+              );
+            },
           ),
         ],
       ),

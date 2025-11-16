@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/doctor_text_field_item.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
 
 class AdditionalProgramSection extends StatelessWidget {
   const AdditionalProgramSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<DoctorHomeViewModel>();
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(8.w),
@@ -49,7 +53,7 @@ class AdditionalProgramSection extends StatelessWidget {
 
           DoctorTextFieldItem(
             labelText: 'التشريح',
-            controller: TextEditingController(),
+            controller: viewModel.anatomy,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
@@ -59,7 +63,7 @@ class AdditionalProgramSection extends StatelessWidget {
           ),
           DoctorTextFieldItem(
             labelText: 'التشخيص',
-            controller: TextEditingController(),
+            controller: viewModel.diagnosis,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
@@ -69,7 +73,7 @@ class AdditionalProgramSection extends StatelessWidget {
           ),
           DoctorTextFieldItem(
             labelText: 'البرنامج العلاجي',
-            controller: TextEditingController(),
+            controller: viewModel.treatment,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';

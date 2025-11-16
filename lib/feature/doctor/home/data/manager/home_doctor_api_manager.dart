@@ -6,11 +6,11 @@ import 'package:smart_check/core/utils/failure.dart';
 import 'package:smart_check/feature/doctor/home/data/model/complete_examination_request_dto.dart';
 import 'package:smart_check/feature/doctor/home/data/model/update_examination_request_dto.dart';
 
-class HomeApiManager {
-  HomeApiManager._();
-  static HomeApiManager? _instance;
-  HomeApiManager getInstance() {
-    _instance ?? HomeApiManager._();
+class HomeDoctorApiManager {
+  HomeDoctorApiManager._();
+  static HomeDoctorApiManager? _instance;
+  static HomeDoctorApiManager getInstance() {
+    _instance ??= HomeDoctorApiManager._();
     return _instance!;
   }
 

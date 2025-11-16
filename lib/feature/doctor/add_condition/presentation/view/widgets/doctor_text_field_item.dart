@@ -6,10 +6,14 @@ import 'package:smart_check/core/theme/color_manager.dart';
 class DoctorTextFieldItem extends StatelessWidget {
   const DoctorTextFieldItem({
     super.key,
+    this.keyboardType = TextInputType.multiline,
+
     required this.labelText,
     this.validator,
     required this.controller,
   });
+  final TextInputType keyboardType;
+
   final String labelText;
   final String? Function(String?)? validator;
   final TextEditingController controller;
@@ -19,9 +23,11 @@ class DoctorTextFieldItem extends StatelessWidget {
       // height: 100.h,
       // width: 100,
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+
         style: TextStyle(
           color: ColorManager.black,
-          fontSize: 18.sp,
+          fontSize: 14.sp,
           fontWeight: FontWeight.w500,
         ),
         validator: validator,

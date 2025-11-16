@@ -2,6 +2,82 @@ import 'package:dio/dio.dart';
 import 'package:smart_check/core/constants/api_constatnt.dart';
 import 'package:smart_check/core/utils/shared_preference_utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:smart_check/feature/admin/home/data/manager/home_api_manager.dart';
+import 'package:smart_check/feature/admin/home/data/repository/data_source/home_remote_api_data_source_impl.dart';
+import 'package:smart_check/feature/admin/home/data/repository/repo/home_remote_repository_impl.dart';
+import 'package:smart_check/feature/admin/home/domain/repository/data_source/home_data_sourec_contract.dart';
+import 'package:smart_check/feature/admin/home/domain/repository/repo/home_repository_contract.dart';
+import 'package:smart_check/feature/admin/home/domain/use_case/home_use_case.dart';
+import 'package:smart_check/feature/doctor/add_condition/data/manager/add_examination_api_manager.dart';
+import 'package:smart_check/feature/doctor/add_condition/data/repository/data_source/add_examination_remote_api_data_source_impl.dart';
+import 'package:smart_check/feature/doctor/add_condition/data/repository/repo/add_examination_repository_impl.dart';
+import 'package:smart_check/feature/doctor/add_condition/domain/repository/data_source/add_examination_remote_data_source_contract.dart';
+import 'package:smart_check/feature/doctor/add_condition/domain/repository/repo/add_examination_repository_contract.dart';
+import 'package:smart_check/feature/doctor/add_condition/domain/use_case/add_examination_use_Case.dart';
+import 'package:smart_check/feature/doctor/home/data/manager/home_doctor_api_manager.dart';
+import 'package:smart_check/feature/doctor/home/data/repository/data_source/manage_examination_remote_api_data_source_impl.dart';
+import 'package:smart_check/feature/doctor/home/data/repository/repo/manage_examintion_repository_impl.dart';
+import 'package:smart_check/feature/doctor/home/domain/repository/data_source/manage_examination_remote_data_source_contract.dart';
+import 'package:smart_check/feature/doctor/home/domain/repository/repo/manage_examination_repository_contract.dart';
+import 'package:smart_check/feature/doctor/home/domain/use_case/manage_examination_use_case.dart';
+
+AddExaminationUseCase injectAddExaminationUseCase() {
+  return AddExaminationUseCase(
+    addExaminationRepositoryContract: injectAddExaminationRepositoryContract(),
+  );
+}
+
+AddExaminationRepositoryContract injectAddExaminationRepositoryContract() {
+  return AddExaminationRepositoryImpl(
+    addExaminationRemoteDataSourceContract:
+        injectAddExaminationRemoteDataSourceContract(),
+  );
+}
+
+AddExaminationRemoteDataSourceContract
+injectAddExaminationRemoteDataSourceContract() {
+  return AddConditionRemoteApiDataSourceImpl(
+    addExaminationApiManager: AddExaminationApiManager.getInstance(),
+  );
+}
+
+HomeUseCase injectHomeUseCase() {
+  return HomeUseCase(homeRepositoryContract: injectHomeRepositoryContract());
+}
+
+HomeRepositoryContract injectHomeRepositoryContract() {
+  return HomeRemoteRepositoryImpl(
+    homeDataSourecContract: injectHomeDataSourecContract(),
+  );
+}
+
+HomeDataSourecContract injectHomeDataSourecContract() {
+  return HomeRemoteApiDataSourceImpl(
+    homeApiManager: HomeApiManager.getInstance(),
+  );
+}
+
+ManageExaminationUseCase injectManageExaminationUseCase() {
+  return ManageExaminationUseCase(
+    manageExaminationRepositoryContract:
+        injectManageExaminationRepositoryContract(),
+  );
+}
+
+ManageExaminationRepositoryContract
+injectManageExaminationRepositoryContract() {
+  return ManageExamintionRepositoryImpl(
+    manageExaminationRemoteDataSourceContract:
+        injectManageExaminationRemoteDataSourceContract(),
+  );
+}
+
+ManageExaminationRemoteDataSourceContract
+injectManageExaminationRemoteDataSourceContract() {
+  return ManageExaminationRemoteApiDataSourceImpl(
+    homeApiManager: HomeDoctorApiManager.getInstance(),
+  );
+}
 
 Future<bool> isConnected() async {
   var connectivityResults = await Connectivity()
