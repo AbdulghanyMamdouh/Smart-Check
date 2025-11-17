@@ -11,6 +11,7 @@ import 'package:smart_check/feature/admin/home/presentation/view/screens/home_sc
 import 'package:smart_check/feature/admin/manager/presentation/view/screens/manager_screen.dart';
 import 'package:smart_check/feature/admin/statistics/presentation/view/screens/statistic_screen.dart';
 import 'package:smart_check/feature/auth/presentation/view/login_emp_screen.dart';
+import 'package:smart_check/feature/auth/presentation/view_model/auth_view_model.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/screens/add_condition_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/screens/doctor_condition_details_screen.dart';
@@ -30,6 +31,10 @@ class SmartCheckApp extends StatelessWidget {
             create: (context) => DoctorHomeViewModel(
               manageExaminationUseCase: injectManageExaminationUseCase(),
             ),
+          ),
+          BlocProvider(
+            create: (context) =>
+                AuthViewModel(loginUseCase: injectLoginUseCase()),
           ),
           BlocProvider(
             create: (context) => ManagerViewModel(
@@ -57,7 +62,7 @@ class SmartCheckApp extends StatelessWidget {
             FragmentScreen.routeName: (_) => FragmentScreen(),
             LoginEmpScreen.routeName: (_) => LoginEmpScreen(),
           },
-          initialRoute: FragmentScreen.routeName,
+          initialRoute: LoginAdminScreen.routeName,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
