@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/screens/condition_details_screen.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view/screens/doctor_condition_details_screen.dart';
 
 class ConditionItem extends StatelessWidget {
   const ConditionItem({super.key, required this.examinationEntity});
@@ -11,7 +11,7 @@ class ConditionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Navigator.of(context).pushNamed(
-        ConditionDetailsScreen.routeName,
+        DoctorConditionDetailsScreen.routeName,
         arguments: examinationEntity,
       ),
       child: Container(
@@ -63,6 +63,7 @@ class ConditionItem extends StatelessWidget {
             ),
 
             Text(
+              textAlign: TextAlign.center,
               examinationEntity.diagnosis ??
                   """
     

@@ -36,6 +36,7 @@ class DoctorTextFieldItem extends StatelessWidget {
         controller: controller,
         maxLines: 5,
         minLines: 1,
+        textAlign: TextAlign.center,
         textAlignVertical: TextAlignVertical.top,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(4),

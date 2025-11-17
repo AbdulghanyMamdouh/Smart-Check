@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/client_text_field_item.dart';
-import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/doctor_text_field_item.dart';
+import 'package:smart_check/core/widgets/doctor_text_field_item.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view_model/add_examination_view_model.dart';
 
 class ChikenSection extends StatelessWidget {

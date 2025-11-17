@@ -71,6 +71,28 @@ class DoctorHomeScreen extends StatelessWidget {
                       clientCode: '222',
                       employeeUsername: 'alia',
                       isCompleted: true,
+                      compliant:
+                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
+                      diagnosis:
+                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
+                      clientAddress: 'wafaeya',
+                      clientPhone: '01123735282',
+                      herdAgeInDays: 23,
+                      herdCount: 2234,
+                      herdDied: 32,
+                      herdFeedPerDay: 34,
+                      herdWaterPerDay: 23,
+                      herdType: 'dsk3',
+                      lastAntibiotic:
+                          'kdkjsl sal;d sjkd hk ksdakhs dklsdjkdf kljfd\nieifp e[pe fopf]pfkf e;opcce\n hhe ehpw p[wpwe]',
+                      treatment:
+                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
+
+                      immunisationProgram:
+                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
+
+                      anatomy:
+                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
                     ),
                   ),
                 ),

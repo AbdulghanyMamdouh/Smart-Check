@@ -9,7 +9,7 @@ class ManagerApiManager {
   ManagerApiManager._();
   static ManagerApiManager? _instance;
   static ManagerApiManager getInstance() {
-    _instance ?? ManagerApiManager._();
+    _instance ??= ManagerApiManager._();
     return _instance!;
   }
 

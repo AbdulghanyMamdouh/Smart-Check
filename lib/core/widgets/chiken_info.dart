@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/widgets/information_chiken_item.dart';
+import 'package:smart_check/core/widgets/information_chiken_item.dart';
 
 // ignore: must_be_immutable
 class ChikenInfo extends StatelessWidget {

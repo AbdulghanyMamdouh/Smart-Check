@@ -24,6 +24,12 @@ class HomeUpdateExaminationError extends DoctorHomeState {
   HomeUpdateExaminationError({required this.errMsg});
 }
 
+class HomeUpdateExaminationIdError extends DoctorHomeState {
+  final String errMsg;
+
+  HomeUpdateExaminationIdError({required this.errMsg});
+}
+
 class HomeUpdateExaminationSuccess extends DoctorHomeState {
   final String sucMsg;
 

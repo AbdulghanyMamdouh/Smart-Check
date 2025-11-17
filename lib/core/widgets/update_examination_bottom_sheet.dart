@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/utils/custom_dialog.dart';
 import 'package:smart_check/core/widgets/default_button.dart';
-import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/doctor_text_field_item.dart';
+import 'package:smart_check/core/widgets/doctor_text_field_item.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_state.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
 
@@ -23,6 +23,7 @@ class UpdateExaminationBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     var viewModel = context.read<DoctorHomeViewModel>();
     viewModel.value = TextEditingController(text: value);
+    viewModel.examinationId = examinationId;
 
     return SingleChildScrollView(
       child: Container(
@@ -63,6 +64,8 @@ class UpdateExaminationBottomSheet extends StatelessWidget {
                   CustomDialog.showLoading(context);
                 } else if (state is HomeUpdateExaminationError) {
                   CustomDialog.hideLoading(context);
+                  CustomDialog.showMessage(state.errMsg);
+                } else if (state is HomeUpdateExaminationIdError) {
                   CustomDialog.showMessage(state.errMsg);
                 } else if (state is HomeUpdateExaminationSuccess) {
                   CustomDialog.hideLoading(context);

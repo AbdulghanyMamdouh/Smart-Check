@@ -28,7 +28,7 @@ class DoctorHomeViewModel extends Cubit<DoctorHomeState> {
 
   Future<void> updateExamination() async {
     if (examinationId == null) {
-      emit(HomeCompleteExaminationError(errMsg: "Examination ID is missing"));
+      emit(HomeUpdateExaminationIdError(errMsg: "Examination ID is missing"));
       return;
     }
 

@@ -15,3 +15,9 @@ class AddEmployeeError extends ManagerStates {
 
   AddEmployeeError({required this.errMsg});
 }
+
+class AddEmployeeErrorBranchName extends ManagerStates {
+  final String errMsg;
+
+  AddEmployeeErrorBranchName({required this.errMsg});
+}

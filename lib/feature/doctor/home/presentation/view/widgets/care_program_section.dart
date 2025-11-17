@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
-import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/doctor_text_field_item.dart';
+import 'package:smart_check/core/widgets/doctor_text_field_item.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
 
 class CareProgramSection extends StatelessWidget {

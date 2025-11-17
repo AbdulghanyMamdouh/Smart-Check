@@ -6,15 +6,15 @@ import 'package:smart_check/core/utils/custom_dialog.dart';
 import 'package:smart_check/core/widgets/default_button.dart';
 import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/additional_program_section.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/widgets/care_info.dart';
+import 'package:smart_check/core/widgets/care_info.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/care_program_section.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/widgets/chiken_info.dart';
+import 'package:smart_check/core/widgets/chiken_info.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_state.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
 
-class ConditionDetailsScreen extends StatelessWidget {
-  const ConditionDetailsScreen({super.key});
-  static const String routeName = 'con_det';
+class DoctorConditionDetailsScreen extends StatelessWidget {
+  const DoctorConditionDetailsScreen({super.key});
+  static const String routeName = 'doc_con_det';
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<DoctorHomeViewModel>();
@@ -43,7 +43,7 @@ class ConditionDetailsScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: examination.isCompleted ?? false
+      body: examination.isCompleted!
           ? Container(
               width: double.infinity,
 
@@ -126,7 +126,7 @@ class ConditionDetailsScreen extends StatelessWidget {
                           icon: Icon(Icons.arrow_forward),
                           label: 'اكمال تسجيل الحالة',
                           onPressed: () {
-                            viewModel.examinationId = examination.id;
+                            viewModel.examinationId = 3;
                             viewModel.completeExamination();
                           },
                         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/widgets/information_care_item.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/widgets/update_examination_bottom_sheet.dart';
+import 'package:smart_check/core/widgets/information_care_item.dart';
+import 'package:smart_check/core/widgets/update_examination_bottom_sheet.dart';
 
 // ignore: must_be_immutable
 class CareInfo extends StatelessWidget {
@@ -51,18 +51,16 @@ class CareInfo extends StatelessWidget {
           ),
           InformationCareItem(
             labelText: 'الشكوي',
-            hintText:
-                examinationEntity.compliant ??
-                'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
+            hintText: examinationEntity.compliant.toString(),
             onLongPress: () {
               showModalBottomSheet(
                 context: context,
                 builder: (context) => UpdateExaminationBottomSheet(
-                  examinationId: examinationEntity.id,
+                  examinationId: examinationEntity.id ?? 2,
                   keyString: 'compliant',
                   value:
                       examinationEntity.compliant ??
-                      'hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen',
+                      ' eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen',
                 ),
               );
             },

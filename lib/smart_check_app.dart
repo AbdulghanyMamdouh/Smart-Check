@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_check/core/di/di.dart';
+import 'package:smart_check/feature/admin/home/presentation/view/screens/admin_condition_details_screen.dart';
 import 'package:smart_check/feature/admin/home/presentation/view/screens/fragment_screen.dart';
+import 'package:smart_check/feature/admin/manager/presentation/view_model/manager_view_model.dart';
 import 'package:smart_check/feature/auth/presentation/view/login_admin_screen.dart';
 import 'package:smart_check/feature/admin/home/presentation/view/screens/home_screen.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view/screens/manager_screen.dart';
@@ -11,7 +13,7 @@ import 'package:smart_check/feature/admin/statistics/presentation/view/screens/s
 import 'package:smart_check/feature/auth/presentation/view/login_emp_screen.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/screens/add_condition_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/screens/condition_details_screen.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view/screens/doctor_condition_details_screen.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/screens/doctor_home_screen.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
 
@@ -25,8 +27,13 @@ class SmartCheckApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => DoctorHomeViewModel(
+            create: (context) => DoctorHomeViewModel(
               manageExaminationUseCase: injectManageExaminationUseCase(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => ManagerViewModel(
+              addEmployeeUseCase: injectAddEmployeeUseCase(),
             ),
           ),
         ],
@@ -43,11 +50,14 @@ class SmartCheckApp extends StatelessWidget {
             StatisticScreen.routeName: (_) => StatisticScreen(),
             AddConditionScreen.routeName: (_) => AddConditionScreen(),
             DoctorHomeScreen.routeName: (_) => DoctorHomeScreen(),
-            ConditionDetailsScreen.routeName: (_) => ConditionDetailsScreen(),
+            DoctorConditionDetailsScreen.routeName: (_) =>
+                DoctorConditionDetailsScreen(),
+            AdminConditionDetailsScreen.routeName: (_) =>
+                AdminConditionDetailsScreen(),
             FragmentScreen.routeName: (_) => FragmentScreen(),
             LoginEmpScreen.routeName: (_) => LoginEmpScreen(),
           },
-          initialRoute: DoctorHomeScreen.routeName,
+          initialRoute: FragmentScreen.routeName,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

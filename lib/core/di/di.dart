@@ -8,6 +8,12 @@ import 'package:smart_check/feature/admin/home/data/repository/repo/home_remote_
 import 'package:smart_check/feature/admin/home/domain/repository/data_source/home_data_sourec_contract.dart';
 import 'package:smart_check/feature/admin/home/domain/repository/repo/home_repository_contract.dart';
 import 'package:smart_check/feature/admin/home/domain/use_case/home_use_case.dart';
+import 'package:smart_check/feature/admin/manager/data/manager/manager_api_manager.dart';
+import 'package:smart_check/feature/admin/manager/data/repository/data_source/manager_remote_api_data_source_impl.dart';
+import 'package:smart_check/feature/admin/manager/data/repository/repo/manager_remote_repository_impl.dart';
+import 'package:smart_check/feature/admin/manager/domain/repository/data_source/manager_remote_data_source_contract.dart';
+import 'package:smart_check/feature/admin/manager/domain/repository/repo/manager_repository_contract.dart';
+import 'package:smart_check/feature/admin/manager/domain/use_case/add_employee_use_case.dart';
 import 'package:smart_check/feature/doctor/add_condition/data/manager/add_examination_api_manager.dart';
 import 'package:smart_check/feature/doctor/add_condition/data/repository/data_source/add_examination_remote_api_data_source_impl.dart';
 import 'package:smart_check/feature/doctor/add_condition/data/repository/repo/add_examination_repository_impl.dart';
@@ -20,6 +26,24 @@ import 'package:smart_check/feature/doctor/home/data/repository/repo/manage_exam
 import 'package:smart_check/feature/doctor/home/domain/repository/data_source/manage_examination_remote_data_source_contract.dart';
 import 'package:smart_check/feature/doctor/home/domain/repository/repo/manage_examination_repository_contract.dart';
 import 'package:smart_check/feature/doctor/home/domain/use_case/manage_examination_use_case.dart';
+
+AddEmployeeUseCase injectAddEmployeeUseCase() {
+  return AddEmployeeUseCase(
+    managerRepositoryContract: injectManagerRepositoryContract(),
+  );
+}
+
+ManagerRepositoryContract injectManagerRepositoryContract() {
+  return ManagerRemoteRepositoryImpl(
+    managerRemoteDataSourceContract: injectManagerRemoteDataSourceContract(),
+  );
+}
+
+ManagerRemoteDataSourceContract injectManagerRemoteDataSourceContract() {
+  return ManagerRemoteApiDataSourceImpl(
+    managerApiManager: ManagerApiManager.getInstance(),
+  );
+}
 
 AddExaminationUseCase injectAddExaminationUseCase() {
   return AddExaminationUseCase(

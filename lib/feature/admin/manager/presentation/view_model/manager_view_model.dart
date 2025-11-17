@@ -10,21 +10,24 @@ class ManagerViewModel extends Cubit<ManagerStates> {
   }) : super(ManagerInitial());
   var userName = TextEditingController();
   var password = TextEditingController();
-  var branchName = TextEditingController();
+  String? branchName;
   final formKey = GlobalKey<FormState>();
   void clearInputs() {
-    branchName.clear();
     userName.clear();
     password.clear();
   }
 
   Future<void> addEmployee() async {
-    if (formKey.currentState?.validate() ?? false) {
+    if (branchName == null || branchName == '') {
+      emit(
+        AddEmployeeErrorBranchName(errMsg: 'اختر الفرع لتسجيل موظف جديد'),
+      );
+    } else if (formKey.currentState?.validate() ?? false) {
       emit(AddEmployeeLoading());
       final either = await addEmployeeUseCase.addEmployee(
         userName: userName.text.trim(),
         password: password.text.trim(),
-        branchName: branchName.text.trim(),
+        branchName: branchName!.trim(),
       );
       either.fold(
         (failure) {
@@ -44,7 +47,6 @@ class ManagerViewModel extends Cubit<ManagerStates> {
 
   @override
   Future<void> close() {
-    branchName.dispose();
     userName.dispose();
     password.dispose();
     return super.close();
