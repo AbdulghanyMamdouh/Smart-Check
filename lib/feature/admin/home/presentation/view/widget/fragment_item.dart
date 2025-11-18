@@ -14,7 +14,7 @@ class FragmentItem extends StatelessWidget {
     'النوبارية',
     "مدينة السادات",
     "دمنهور",
-    "للبحث بكود العميل",
+    "ابحث عن...",
   ];
   @override
   Widget build(BuildContext context) {
