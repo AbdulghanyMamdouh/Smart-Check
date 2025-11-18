@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/admin/home/presentation/view/widget/nav_bar_icon.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view/screens/manager_screen.dart';
-import 'package:smart_check/feature/admin/statistics/presentation/view/screens/statistic_screen.dart';
 
 Widget customBottomNavigationBar({required BuildContext context}) {
   return ClipRRect(
@@ -24,7 +23,7 @@ Widget customBottomNavigationBar({required BuildContext context}) {
           if (index == 0) {
             Navigator.of(context).pushNamed(ManagerScreen.routeName);
           } else if (index == 2) {
-            Navigator.of(context).pushNamed(StatisticScreen.routeName);
+            // Navigator.of(context).pushNamed(StatisticScreen.routeName);
           }
         },
         currentIndex: 1,

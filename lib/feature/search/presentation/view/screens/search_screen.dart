@@ -50,7 +50,7 @@ class SearchScreen extends StatelessWidget {
           ),
         ],
         title: Text(
-          'branchName',
+          'ابحث',
           style: TextStyle(color: ColorManager.white),
         ),
       ),
@@ -110,7 +110,9 @@ class SearchScreen extends StatelessWidget {
                 }
 
                 /// DEFAULT
-                return const SizedBox();
+                return Center(
+                  child: Image.asset('assets/images/empty.png'),
+                );
               },
             ),
           ],

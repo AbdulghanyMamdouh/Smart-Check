@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_check/feature/admin/manager/domain/use_case/add_employee_use_case.dart';
+import 'package:smart_check/feature/admin/manager/domain/use_case/manager_employee_use_case.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view_model/manager_states.dart';
 
 class ManagerViewModel extends Cubit<ManagerStates> {
-  final AddEmployeeUseCase addEmployeeUseCase;
+  final ManagerEmployeeUseCase addEmployeeUseCase;
   ManagerViewModel({
     required this.addEmployeeUseCase,
   }) : super(ManagerInitial());
@@ -15,6 +15,19 @@ class ManagerViewModel extends Cubit<ManagerStates> {
   void clearInputs() {
     userName.clear();
     password.clear();
+  }
+
+  Future<void> getAllEmployee() async {
+    emit(GetEmployeesLoading());
+    final either = await addEmployeeUseCase.getAllEmployees();
+    either.fold(
+      (failure) {
+        emit(GetEmployeesError(errMsg: failure.errorMessage!));
+      },
+      (response) {
+        emit(GetEmployeesSuccess(employees: response));
+      },
+    );
   }
 
   Future<void> addEmployee() async {

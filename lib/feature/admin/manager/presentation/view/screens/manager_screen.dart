@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
+import 'package:smart_check/core/utils/error_utils.dart';
+import 'package:smart_check/core/utils/loading_indicator.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view/widgets/add_employee_bottom_sheet.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view/widgets/employee_item.dart';
+import 'package:smart_check/feature/admin/manager/presentation/view_model/manager_states.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view_model/manager_view_model.dart';
 
 class ManagerScreen extends StatelessWidget {
@@ -13,6 +16,7 @@ class ManagerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
+        var viewModel = context.read<ManagerViewModel>();
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -33,7 +37,7 @@ class ManagerScreen extends StatelessWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (context) => AddEmployeeBottomSheet(
-                  viewModel: context.read<ManagerViewModel>(),
+                  viewModel: viewModel,
                 ),
               );
             },
@@ -44,12 +48,27 @@ class ManagerScreen extends StatelessWidget {
               color: ColorManager.white,
             ),
           ),
-          body: Container(
-            padding: EdgeInsets.only(top: 25.h, left: 12.w, right: 12.w),
-            child: ListView.builder(
-              itemCount: 8,
-              itemBuilder: (_, index) => EmployeeItem(branchName: 'Damnhur'),
-            ),
+          body: BlocBuilder<ManagerViewModel, ManagerStates>(
+            bloc: viewModel..getAllEmployee(),
+            builder: (context, state) {
+              if (state is GetEmployeesLoading) {
+                return LoadingIndicator();
+              } else if (state is GetEmployeesError) {
+                return ErrorUtils(errorMsg: state.errMsg);
+              } else if (state is GetEmployeesSuccess) {
+                return Container(
+                  padding: EdgeInsets.only(top: 25.h, left: 12.w, right: 12.w),
+                  child: ListView.builder(
+                    itemCount: state.employees.length,
+                    itemBuilder: (_, index) => EmployeeItem(
+                      employeeEntity: state.employees[index],
+                    ),
+                  ),
+                );
+              } else {
+                return SizedBox();
+              }
+            },
           ),
         );
       },

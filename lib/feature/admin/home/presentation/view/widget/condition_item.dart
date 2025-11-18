@@ -33,7 +33,9 @@ class ConditionItem extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               blurStyle: BlurStyle.inner,
-              color: Colors.blue,
+              color: examinationEntity.isCompleted ?? false
+                  ? Colors.blue
+                  : ColorManager.red,
               blurRadius: 5,
               spreadRadius: 0,
               offset: Offset(-3, 4),

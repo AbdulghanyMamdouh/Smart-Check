@@ -10,7 +10,6 @@ import 'package:smart_check/feature/admin/manager/presentation/view_model/manage
 import 'package:smart_check/feature/auth/presentation/view/login_admin_screen.dart';
 import 'package:smart_check/feature/admin/home/presentation/view/screens/home_screen.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view/screens/manager_screen.dart';
-import 'package:smart_check/feature/admin/statistics/presentation/view/screens/statistic_screen.dart';
 import 'package:smart_check/feature/auth/presentation/view/login_emp_screen.dart';
 import 'package:smart_check/feature/auth/presentation/view_model/auth_view_model.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/screens/add_condition_screen.dart';
@@ -65,7 +64,6 @@ class SmartCheckApp extends StatelessWidget {
             LoginAdminScreen.routeName: (_) => LoginAdminScreen(),
             HomeScreen.routeName: (_) => HomeScreen(),
             ManagerScreen.routeName: (_) => ManagerScreen(),
-            StatisticScreen.routeName: (_) => StatisticScreen(),
             AddConditionScreen.routeName: (_) => AddConditionScreen(),
             DoctorHomeScreen.routeName: (_) => DoctorHomeScreen(),
             DoctorConditionDetailsScreen.routeName: (_) =>

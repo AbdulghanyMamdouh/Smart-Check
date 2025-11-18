@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/widgets/easy_date_package.dart';
-import 'package:smart_check/core/widgets/search_text_field.dart';
-import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
+import 'package:smart_check/feature/auth/domain/entity/login_result_entity.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/screens/add_condition_screen.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/condition_item.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_state.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
 
 class DoctorHomeScreen extends StatelessWidget {
   const DoctorHomeScreen({super.key});
@@ -14,6 +16,15 @@ class DoctorHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
+        final args =
+            ModalRoute.of(context)!.settings.arguments as LoginResultEntity;
+        DoctorHomeViewModel viewModel = context.read<DoctorHomeViewModel>();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          viewModel.getAllExaminations(
+            branchName: args.user?.branchName ?? "دمنهور",
+            dateTime: DateTime.now(),
+          );
+        });
         return Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -29,24 +40,7 @@ class DoctorHomeScreen extends StatelessWidget {
           appBar: AppBar(
             centerTitle: false,
             backgroundColor: const Color.fromARGB(226, 55, 145, 228),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.calendar_month_outlined),
-                iconSize: 40.sp,
-                color: ColorManager.white,
-                onPressed: () {
-                  showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime.now().subtract(Duration(days: 120)),
-                    lastDate: DateTime.now(),
-                  );
-                },
-              ),
-              SearchTextField(
-                onChanged: (String p1) {},
-              ),
-            ],
+
             title: Text(
               'الحالات المسجلة',
               style: TextStyle(
@@ -58,45 +52,59 @@ class DoctorHomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 EasyDatePackage(
-                  onDateChange: (selectedDate) {},
+                  onDateChange: (selectedDate) {
+                    viewModel.getAllExaminations(
+                      branchName: "دمنهور",
+                      dateTime: selectedDate,
+                    );
+                  },
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(top: 16.h),
-                  itemCount: 6,
-                  itemBuilder: (_, index) => ConditionItem(
-                    examinationEntity: ExaminationEntity(
-                      id: 2,
-                      branchName: 'dam',
-                      clientName: 'ali',
-                      clientCode: '222',
-                      employeeUsername: 'alia',
-                      isCompleted: true,
-                      compliant:
-                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
-                      diagnosis:
-                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
-                      clientAddress: 'wafaeya',
-                      clientPhone: '01123735282',
-                      herdAgeInDays: 23,
-                      herdCount: 2234,
-                      herdDied: 32,
-                      herdFeedPerDay: 34,
-                      herdWaterPerDay: 23,
-                      herdType: 'dsk3',
-                      lastAntibiotic:
-                          'kdkjsl sal;d sjkd hk ksdakhs dklsdjkdf kljfd\nieifp e[pe fopf]pfkf e;opcce\n hhe ehpw p[wpwe]',
-                      treatment:
-                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
-
-                      immunisationProgram:
-                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
-
-                      anatomy:
-                          'mnbvxedsfdgfhgjhkjlkm\nmshd fhwkdod edyid wsjsk eypwte dow swoskd \n ghowo ueosadwde uua ayuq eerw siofhk fhf\njjjeosalxv l;v kl;dsl nflkx kdx\nis fhsklk',
-                    ),
-                  ),
+                BlocBuilder<DoctorHomeViewModel, DoctorHomeState>(
+                  bloc: viewModel,
+                  builder: (context, state) {
+                    if (state is GetAllExLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is GetAllExError) {
+                      return Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16.w),
+                          child: Text(
+                            state.errorMessage,
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 18.sp,
+                            ),
+                          ),
+                        ),
+                      );
+                    } else if (state is GetAllExSuccess) {
+                      if (state.examinations.isEmpty ||
+                          state.examinations == []) {
+                        return Padding(
+                          padding: EdgeInsets.only(top: 50.h),
+                          child: Center(
+                            child: Image.asset('assets/images/empty.png'),
+                          ),
+                        );
+                      } else {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.only(top: 16.h),
+                          itemCount: state.examinations.length,
+                          itemBuilder: (_, index) {
+                            return ConditionItem(
+                              examinationEntity: state.examinations[index],
+                            );
+                          },
+                        );
+                      }
+                    } else {
+                      return Center(
+                        child: Image.asset('assets/images/empty.png'),
+                      );
+                    }
+                  },
                 ),
               ],
             ),

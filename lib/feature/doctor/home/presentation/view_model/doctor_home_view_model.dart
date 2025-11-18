@@ -26,6 +26,33 @@ class DoctorHomeViewModel extends Cubit<DoctorHomeState> {
     treatment.clear();
   }
 
+  Future<void> getAllExaminations({
+    required String branchName,
+    required DateTime dateTime,
+  }) async {
+    emit(GetAllExLoading());
+    final either = await manageExaminationUseCase.getAllExaminations(
+      branchName: branchName,
+      dateTime: dateTime,
+    );
+    either.fold(
+      (failure) {
+        emit(
+          GetAllExError(
+            errorMessage: failure.errorMessage!,
+          ),
+        );
+      },
+      (examinations) {
+        emit(
+          GetAllExSuccess(
+            examinations: examinations,
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> updateExamination() async {
     if (examinationId == null) {
       emit(HomeUpdateExaminationIdError(errMsg: "Examination ID is missing"));

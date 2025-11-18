@@ -7,8 +7,8 @@ import 'package:smart_check/core/utils/shared_preference_utils.dart';
 import 'package:smart_check/core/utils/validator.dart';
 import 'package:smart_check/core/widgets/default_button.dart';
 import 'package:smart_check/core/widgets/default_text_field.dart';
+import 'package:smart_check/feature/admin/home/presentation/view/screens/fragment_screen.dart';
 import 'package:smart_check/feature/admin/home/presentation/view/screens/home_screen.dart';
-import 'package:smart_check/feature/auth/presentation/view/login_emp_screen.dart';
 import 'package:smart_check/feature/auth/presentation/view_model/auth_states.dart';
 import 'package:smart_check/feature/auth/presentation/view_model/auth_view_model.dart';
 
@@ -68,6 +68,7 @@ class LoginAdminScreen extends StatelessWidget {
               ),
               SizedBox(height: 20.h),
               DefaultTextField(
+                isPassword: true,
                 validator: (value) {
                   if (!Validator.isPassowrd(value)) {
                     return 'invalid password!.';
@@ -83,7 +84,7 @@ class LoginAdminScreen extends StatelessWidget {
                   viewModel.clearInputs();
                   Navigator.pushNamed(
                     context,
-                    LoginEmpScreen.routeName,
+                    FragmentScreen.routeName,
                   ).then((_) => viewModel.clearInputs());
                 },
 

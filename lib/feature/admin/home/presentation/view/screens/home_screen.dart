@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/widgets/easy_date_package.dart';
 import 'package:smart_check/feature/admin/home/presentation/view/widget/condition_item.dart';
-import 'package:smart_check/feature/admin/home/presentation/view/widget/custom_bottom_nav_bar.dart';
 import 'package:smart_check/feature/admin/home/presentation/view_model/home_view_model.dart';
 import 'package:smart_check/feature/admin/home/presentation/view_model/home_state.dart';
+import 'package:smart_check/feature/admin/manager/presentation/view/screens/manager_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,6 +24,17 @@ class HomeScreen extends StatelessWidget {
     });
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(ManagerScreen.routeName);
+        },
+        backgroundColor: ColorManager.darkPrimary,
+        child: Icon(
+          Icons.manage_accounts,
+          size: 30.sp,
+          color: ColorManager.white,
+        ),
+      ),
       appBar: AppBar(
         centerTitle: false,
         backgroundColor: const Color.fromARGB(226, 55, 145, 228),
@@ -57,11 +68,14 @@ class HomeScreen extends StatelessWidget {
                   return Center(
                     child: Padding(
                       padding: EdgeInsets.all(16.w),
-                      child: Text(
-                        state.errorMessage,
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 18.sp,
+                      child: Center(
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          state.errorMessage,
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 18.sp,
+                          ),
                         ),
                       ),
                     ),
@@ -70,9 +84,11 @@ class HomeScreen extends StatelessWidget {
                   if (state.examinations.isEmpty || state.examinations == []) {
                     return Padding(
                       padding: EdgeInsets.only(top: 50.h),
-                      child: Text(
-                        "لا توجد نتائج",
-                        style: TextStyle(fontSize: 20.sp),
+                      child: Center(
+                        child: Text(
+                          "لا توجد نتائج",
+                          style: TextStyle(fontSize: 20.sp),
+                        ),
                       ),
                     );
                   } else {
@@ -89,7 +105,9 @@ class HomeScreen extends StatelessWidget {
                     );
                   }
                 } else {
-                  return SizedBox();
+                  return Center(
+                    child: Image.asset('assets/images/empty.png'),
+                  );
                 }
               },
             ),
@@ -97,7 +115,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
 
-      bottomNavigationBar: customBottomNavigationBar(context: context),
+      // bottomNavigationBar: customBottomNavigationBar(context: context),
     );
   }
 }

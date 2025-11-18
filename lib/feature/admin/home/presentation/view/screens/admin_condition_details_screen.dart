@@ -62,10 +62,11 @@ class AdminConditionDetailsScreen extends StatelessWidget {
               ChikenInfo(
                 examinationEntity: examination,
               ),
-              CareInfo(
-                examinationEntity: examination,
-              ),
-              SizedBox(height: 8.h),
+              examination.isCompleted ?? false
+                  ? CareInfo(
+                      examinationEntity: examination,
+                    )
+                  : SizedBox(height: 8.h),
             ],
           ),
         ),

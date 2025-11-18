@@ -1,6 +1,23 @@
+import 'package:smart_check/feature/doctor/home/domain/entity/examination_entity.dart';
+
 abstract class DoctorHomeState {}
 
 class HomeInitialState extends DoctorHomeState {}
+
+class GetAllExSuccess extends DoctorHomeState {
+  List<ExaminationEntity> examinations;
+  GetAllExSuccess({
+    required this.examinations,
+  });
+}
+
+class GetAllExError extends DoctorHomeState {
+  final String errorMessage;
+
+  GetAllExError({required this.errorMessage});
+}
+
+class GetAllExLoading extends DoctorHomeState {}
 
 class HomeCompleteExaminationLoading extends DoctorHomeState {}
 

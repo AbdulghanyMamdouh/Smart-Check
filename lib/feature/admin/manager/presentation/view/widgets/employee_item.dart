@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_check/core/theme/color_manager.dart';
+import 'package:smart_check/feature/admin/manager/domain/entity/employee_entity.dart';
 
 class EmployeeItem extends StatelessWidget {
-  const EmployeeItem({super.key, required this.branchName});
-  final String branchName;
+  const EmployeeItem({super.key, required this.employeeEntity});
+
+  final EmployeeEntity employeeEntity;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,15 +31,10 @@ class EmployeeItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //todo: employee name
-              Text('Name: ahmed'),
+              Text(employeeEntity.username ?? ''),
               //todo: branch name
-              Text(branchName),
+              Text(employeeEntity.branch ?? "null"),
             ],
-          ),
-          IconButton(
-            onPressed: () {},
-            color: ColorManager.primary,
-            icon: Icon(Icons.delete_forever_outlined),
           ),
         ],
       ),

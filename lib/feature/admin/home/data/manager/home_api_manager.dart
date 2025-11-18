@@ -24,7 +24,7 @@ class HomeApiManager {
         final response = await dio.get(ApiConstant.getAllExaminations);
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
           var getExaminationsResponse = GetExaminationResponse.fromJson(
-            response.data!,
+            response.data,
           );
           final allExaminations = getExaminationsResponse.examinations;
           final filteredExaminations = (allExaminations ?? []).where((

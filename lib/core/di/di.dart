@@ -13,7 +13,7 @@ import 'package:smart_check/feature/admin/manager/data/repository/data_source/ma
 import 'package:smart_check/feature/admin/manager/data/repository/repo/manager_remote_repository_impl.dart';
 import 'package:smart_check/feature/admin/manager/domain/repository/data_source/manager_remote_data_source_contract.dart';
 import 'package:smart_check/feature/admin/manager/domain/repository/repo/manager_repository_contract.dart';
-import 'package:smart_check/feature/admin/manager/domain/use_case/add_employee_use_case.dart';
+import 'package:smart_check/feature/admin/manager/domain/use_case/manager_employee_use_case.dart';
 import 'package:smart_check/feature/auth/data/manager/login_api_manager.dart';
 import 'package:smart_check/feature/auth/data/repository/data_source/auth_remote_api_data_source_impl.dart';
 import 'package:smart_check/feature/auth/data/repository/repo/auth_remote_repository_impl.dart';
@@ -73,8 +73,8 @@ AuthRemoteDataSourceContract injectAuthRemoteDataSourceContract() {
   );
 }
 
-AddEmployeeUseCase injectAddEmployeeUseCase() {
-  return AddEmployeeUseCase(
+ManagerEmployeeUseCase injectAddEmployeeUseCase() {
+  return ManagerEmployeeUseCase(
     managerRepositoryContract: injectManagerRepositoryContract(),
   );
 }

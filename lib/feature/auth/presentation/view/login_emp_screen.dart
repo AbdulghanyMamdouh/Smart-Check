@@ -14,6 +14,7 @@ import 'package:smart_check/feature/doctor/home/presentation/view/screens/doctor
 class LoginEmpScreen extends StatelessWidget {
   const LoginEmpScreen({super.key});
   static const String routeName = 'login_emp';
+  final String branchName = '';
   @override
   Widget build(BuildContext context) {
     var viewModel = context.read<AuthViewModel>();
@@ -69,6 +70,7 @@ class LoginEmpScreen extends StatelessWidget {
               ),
               SizedBox(height: 20.h),
               DefaultTextField(
+                isPassword: true,
                 validator: (value) {
                   if (!Validator.isPassowrd(value)) {
                     return 'invalid password!.';
@@ -103,7 +105,11 @@ class LoginEmpScreen extends StatelessWidget {
                 value: state.loginResult.token,
               );
               //todo: go to home
-              Navigator.of(context).pushNamed(DoctorHomeScreen.routeName);
+
+              Navigator.of(context).pushNamed(
+                DoctorHomeScreen.routeName,
+                arguments: state.loginResult.user,
+              );
             } else if (state is EmployeeLoginError) {
               CustomDialog.hideLoading(context);
               CustomDialog.showMessage(state.errorMsg);

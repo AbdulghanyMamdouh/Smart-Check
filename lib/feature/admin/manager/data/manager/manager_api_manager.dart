@@ -4,6 +4,8 @@ import 'package:smart_check/core/constants/api_constatnt.dart';
 import 'package:smart_check/core/di/di.dart';
 import 'package:smart_check/core/utils/failure.dart';
 import 'package:smart_check/feature/admin/manager/data/models/add_employee_request_dto.dart';
+import 'package:smart_check/feature/admin/manager/data/models/get_employees/employee_dto.dart';
+import 'package:smart_check/feature/admin/manager/data/models/get_employees/get_employees_response.dart';
 
 class ManagerApiManager {
   ManagerApiManager._();
@@ -11,6 +13,47 @@ class ManagerApiManager {
   static ManagerApiManager getInstance() {
     _instance ??= ManagerApiManager._();
     return _instance!;
+  }
+
+  Future<Either<Failures, List<EmployeeDto>>> getAllEmployees() async {
+    bool connected = await isConnected();
+    if (connected) {
+      try {
+        final response = await dio.get(
+          ApiConstant.getAllEmployees,
+        );
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          var getEmployeesResponse = GetEmployeesResponse.fromJson(
+            response.data,
+          );
+          return Right(getEmployeesResponse.employees ?? []);
+        } else {
+          return Left(
+            ServerError(
+              errorMessage: response.data["mess"] ?? response.statusMessage,
+            ),
+          );
+        }
+      } on DioException catch (error) {
+        return Left(
+          ServerError(
+            errorMessage: error.message ?? error.toString(),
+          ),
+        );
+      } catch (error) {
+        return Left(
+          ServerError(
+            errorMessage: error.toString(),
+          ),
+        );
+      }
+    } else {
+      return Left(
+        NetworkError(
+          errorMessage: 'check your internet connection.!',
+        ),
+      );
+    }
   }
 
   Future<Either<Failures, String>> addEmployee({
