@@ -16,18 +16,4 @@ class HomeUseCase {
       dateTime: dateTime,
     );
   }
-
-  Future<Either<Failures, List<ExaminationEntity>>> getExaminationsByDate({
-    required DateTime dateTime,
-  }) {
-    return homeRepositoryContract.getExaminationsByDate(dateTime: dateTime);
-  }
-
-  Future<Either<Failures, List<ExaminationEntity>>> getExaminationsByClientId({
-    required String clientCode,
-  }) {
-    return homeRepositoryContract.getExaminationsByClientId(
-      clientCode: clientCode,
-    );
-  }
 }

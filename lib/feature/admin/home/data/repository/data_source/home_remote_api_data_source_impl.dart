@@ -18,18 +18,4 @@ class HomeRemoteApiDataSourceImpl extends HomeDataSourecContract {
       dateTime: dateTime,
     );
   }
-
-  @override
-  Future<Either<Failures, List<ExaminationEntity>>> getExaminationsByClientId({
-    required String clientCode,
-  }) {
-    return homeApiManager.getExaminationsByClientCode(clientCode: clientCode);
-  }
-
-  @override
-  Future<Either<Failures, List<ExaminationEntity>>> getExaminationsByDate({
-    required DateTime dateTime,
-  }) {
-    return homeApiManager.getExaminationsByDate(date: dateTime);
-  }
 }

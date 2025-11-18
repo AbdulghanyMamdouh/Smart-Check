@@ -6,41 +6,11 @@ import 'package:smart_check/feature/admin/home/presentation/view_model/home_stat
 
 class HomeViewModel extends Cubit<HomeState> {
   final HomeUseCase homeUseCase;
-  var clientCode = TextEditingController();
-  DateTime dateTime = DateTime.now();
+
   var formKey = GlobalKey<FormState>();
   HomeViewModel({
     required this.homeUseCase,
   }) : super(HomeInitialState());
-  Future<void> getExaminationsByClientID() async {
-    emit(GetExByClIDLoading());
-    final either = await homeUseCase.getExaminationsByClientId(
-      clientCode: clientCode.text,
-    );
-    either.fold(
-      (failure) {
-        emit(GetExByClIDError(errorMessage: failure.errorMessage!));
-      },
-      (examinations) {
-        emit(GetExByClIDSuccess(examinations: examinations));
-      },
-    );
-  }
-
-  Future<void> getExaminationsByDate() async {
-    emit(GetExByClIDLoading());
-    final either = await homeUseCase.getExaminationsByDate(
-      dateTime: dateTime,
-    );
-    either.fold(
-      (failure) {
-        emit(GetExByClIDError(errorMessage: failure.errorMessage!));
-      },
-      (examinations) {
-        emit(GetExByClIDSuccess(examinations: examinations));
-      },
-    );
-  }
 
   Future<void> getAllExaminations({
     required String branchName,

@@ -18,20 +18,4 @@ class HomeRemoteRepositoryImpl extends HomeRepositoryContract {
       dateTime: dateTime,
     );
   }
-
-  @override
-  Future<Either<Failures, List<ExaminationEntity>>> getExaminationsByClientId({
-    required String clientCode,
-  }) {
-    return homeDataSourecContract.getExaminationsByClientId(
-      clientCode: clientCode,
-    );
-  }
-
-  @override
-  Future<Either<Failures, List<ExaminationEntity>>> getExaminationsByDate({
-    required DateTime dateTime,
-  }) {
-    return homeDataSourecContract.getExaminationsByDate(dateTime: dateTime);
-  }
 }

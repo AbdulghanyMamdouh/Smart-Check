@@ -43,7 +43,9 @@ class DoctorHomeScreen extends StatelessWidget {
                   );
                 },
               ),
-              SearchTextField(),
+              SearchTextField(
+                onChanged: (String p1) {},
+              ),
             ],
             title: Text(
               'الحالات المسجلة',

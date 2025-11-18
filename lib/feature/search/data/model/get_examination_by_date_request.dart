@@ -1,5 +1,5 @@
 class GetExaminationByDateRequest {
-  DateTime? date;
+  String? date;
 
   GetExaminationByDateRequest({this.date});
   Map<String, dynamic> toJson() => {

@@ -7,11 +7,4 @@ abstract class HomeRepositoryContract {
     required String branchName,
     required DateTime dateTime,
   });
-  Future<Either<Failures, List<ExaminationEntity>>> getExaminationsByDate({
-    required DateTime dateTime,
-  });
-
-  Future<Either<Failures, List<ExaminationEntity>>> getExaminationsByClientId({
-    required String clientCode,
-  });
 }

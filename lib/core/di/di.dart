@@ -32,6 +32,30 @@ import 'package:smart_check/feature/doctor/home/data/repository/repo/manage_exam
 import 'package:smart_check/feature/doctor/home/domain/repository/data_source/manage_examination_remote_data_source_contract.dart';
 import 'package:smart_check/feature/doctor/home/domain/repository/repo/manage_examination_repository_contract.dart';
 import 'package:smart_check/feature/doctor/home/domain/use_case/manage_examination_use_case.dart';
+import 'package:smart_check/feature/search/data/manager/search_api_manager.dart';
+import 'package:smart_check/feature/search/data/repository/data_source/search_remote_api_data_source_impl.dart';
+import 'package:smart_check/feature/search/data/repository/repo/search_repository_impl.dart';
+import 'package:smart_check/feature/search/domain/repository/data_source/search_remote_data_source_contract.dart';
+import 'package:smart_check/feature/search/domain/repository/repo/search_repository_contract.dart';
+import 'package:smart_check/feature/search/domain/use_case/search_use_case.dart';
+
+SearchUseCase injectSearchUseCase() {
+  return SearchUseCase(
+    searchRepositoryContract: injectSearchRepositoryContract(),
+  );
+}
+
+SearchRepositoryContract injectSearchRepositoryContract() {
+  return SearchRepositoryImpl(
+    searchRemoteDataSourceContract: injectSearchRemoteDataSourceContract(),
+  );
+}
+
+SearchRemoteDataSourceContract injectSearchRemoteDataSourceContract() {
+  return SearchRemoteApiDataSourceImpl(
+    searchApiManager: SearchApiManager.getInstance(),
+  );
+}
 
 LoginUseCase injectLoginUseCase() {
   return LoginUseCase(authRepositoryContract: injectAuthRepositoryContract());

@@ -3,7 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({super.key});
+  SearchTextField({
+    super.key,
+    required this.onChanged,
+  });
+  void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,7 @@ class SearchTextField extends StatelessWidget {
       width: 105.w,
       child: TextField(
         maxLength: 5,
-
+        onChanged: onChanged,
         cursorColor: Theme.of(context).primaryColor,
         decoration: InputDecoration(
           counterText: '',
