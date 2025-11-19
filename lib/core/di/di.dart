@@ -182,7 +182,19 @@ final dio =
                 // If you want to reject the request with a error message,
                 // you can reject with a `DioException` using `handler.reject(dioError)`.
                 final token = SharedPreferenceUtils.getData(key: 'token');
-                if (token != null) options.headers['token'] = token;
+
+                if (token != null) {
+                  print('\n===============\ntoken not null');
+                  options.headers = {
+                    'Authorization': 'Bearer $token',
+                    'Content-Type': 'application/json',
+                  };
+                } else {
+                  print("TOKEN SENT is null = ${token.toString()}");
+                }
+                print("TOKEN SENT = ${token.toString()}");
+                print("HEADERS = ${options.headers}");
+
                 return handler.next(options);
               },
         ),

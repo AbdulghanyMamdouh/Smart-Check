@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_check/core/entity/examination_entity.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
-import 'package:smart_check/feature/doctor/home/domain/entity/examination_entity.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/screens/doctor_condition_details_screen.dart';
 
 class ConditionItem extends StatelessWidget {
@@ -67,7 +67,7 @@ class ConditionItem extends StatelessWidget {
 
             Text(
               textAlign: TextAlign.center,
-              examinationEntity.diagnosis ??
+              examinationEntity.compliant ??
                   """
     
     التشخيص او شي مميز 

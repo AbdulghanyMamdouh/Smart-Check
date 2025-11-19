@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_check/core/entity/examination_entity.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/utils/custom_dialog.dart';
-import 'package:smart_check/core/widgets/default_button.dart';
-import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/widgets/additional_program_section.dart';
 import 'package:smart_check/core/widgets/care_info.dart';
-import 'package:smart_check/feature/doctor/home/presentation/view/widgets/care_program_section.dart';
 import 'package:smart_check/core/widgets/chiken_info.dart';
+import 'package:smart_check/core/widgets/default_button.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view/widgets/additional_program_section.dart';
+import 'package:smart_check/feature/doctor/home/presentation/view/widgets/care_program_section.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_state.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
 
@@ -22,20 +22,23 @@ class DoctorConditionDetailsScreen extends StatelessWidget {
     var examination =
         ModalRoute.of(context)?.settings.arguments as ExaminationEntity;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(226, 55, 145, 228),
         foregroundColor: ColorManager.white,
+
         title: Row(
           spacing: 8.w,
           children: [
             Text(
-              'امين صبري عفيفي',
+              examination.clientName ?? 'امين صبري عفيفي',
               style: TextStyle(
                 color: ColorManager.white,
               ),
             ),
             Text(
-              '23',
+              examination.clientCode ?? '23',
               style: TextStyle(
                 color: ColorManager.darkPrimary,
               ),
@@ -126,7 +129,7 @@ class DoctorConditionDetailsScreen extends StatelessWidget {
                           icon: Icon(Icons.arrow_forward),
                           label: 'اكمال تسجيل الحالة',
                           onPressed: () {
-                            viewModel.examinationId = 3;
+                            viewModel.examinationId = examination.id;
                             viewModel.completeExamination();
                           },
                         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_check/core/utils/shared_preference_utils.dart';
 import 'package:smart_check/feature/doctor/home/domain/entity/complete_examination_request_entity.dart';
 import 'package:smart_check/feature/doctor/home/domain/use_case/manage_examination_use_case.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_state.dart';
@@ -18,6 +19,7 @@ class DoctorHomeViewModel extends Cubit<DoctorHomeState> {
   var key = TextEditingController();
   var value = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  String? empBranchName;
   void clearInputs() {
     lastAntibiotic.clear();
     immunisationProgram.clear();
@@ -27,12 +29,19 @@ class DoctorHomeViewModel extends Cubit<DoctorHomeState> {
   }
 
   Future<void> getAllExaminations({
-    required String branchName,
     required DateTime dateTime,
   }) async {
+    empBranchName = SharedPreferenceUtils.getData(key: 'branch') as String;
+    if (empBranchName == null || empBranchName == '') {
+      emit(
+        GetAllExError(
+          errorMessage: 'logout please and relogin',
+        ),
+      );
+    }
     emit(GetAllExLoading());
     final either = await manageExaminationUseCase.getAllExaminations(
-      branchName: branchName,
+      branchName: empBranchName ?? 'دمنهور',
       dateTime: dateTime,
     );
     either.fold(
@@ -53,17 +62,17 @@ class DoctorHomeViewModel extends Cubit<DoctorHomeState> {
     );
   }
 
-  Future<void> updateExamination() async {
-    if (examinationId == null) {
+  Future<void> updateExamination({
+    required CompleteExaminationRequestEntity examination,
+  }) async {
+    if (examination.examinationId == null) {
       emit(HomeUpdateExaminationIdError(errMsg: "Examination ID is missing"));
       return;
     }
 
     emit(HomeUpdateExaminationLoading());
     final either = await manageExaminationUseCase.updateExamination(
-      examinationId: examinationId!,
-      key: key.text.trim(),
-      value: value.text.trim(),
+      examinationRequest: examination,
     );
     either.fold(
       (failure) {

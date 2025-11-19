@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/utils/error_utils.dart';
 import 'package:smart_check/core/utils/loading_indicator.dart';
+import 'package:smart_check/core/utils/shared_preference_utils.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view/widgets/add_employee_bottom_sheet.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view/widgets/employee_item.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view_model/manager_states.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view_model/manager_view_model.dart';
+import 'package:smart_check/feature/auth/presentation/view/login_admin_screen.dart';
 
 class ManagerScreen extends StatelessWidget {
   const ManagerScreen({super.key});
@@ -21,12 +23,31 @@ class ManagerScreen extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: const Color.fromARGB(226, 55, 145, 228),
-
+            foregroundColor: ColorManager.white,
             title: Text(
               'إدارة الموظفين',
               style: TextStyle(
                 color: ColorManager.white,
               ),
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(Icons.arrow_forward),
+              ),
+            ],
+            leading: IconButton(
+              onPressed: () async {
+                await SharedPreferenceUtils.removeDate(key: 'token');
+                await SharedPreferenceUtils.removeDate(key: 'login');
+                if (!context.mounted) return;
+                Navigator.of(
+                  context,
+                ).pushReplacementNamed(LoginAdminScreen.routeName);
+              },
+              icon: Icon(Icons.logout_outlined),
             ),
           ),
           floatingActionButton: FloatingActionButton(
@@ -39,7 +60,9 @@ class ManagerScreen extends StatelessWidget {
                 builder: (context) => AddEmployeeBottomSheet(
                   viewModel: viewModel,
                 ),
-              );
+              ).then((_) {
+                viewModel.getAllEmployee();
+              });
             },
             backgroundColor: ColorManager.darkPrimary,
             child: Icon(

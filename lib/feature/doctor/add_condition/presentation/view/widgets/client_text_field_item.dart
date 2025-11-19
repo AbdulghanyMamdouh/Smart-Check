@@ -20,7 +20,8 @@ class ClientTextFieldItem extends StatelessWidget {
     return SizedBox(
       // height: 60.h,
       child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        keyboardType: keyboardType,
+        autovalidateMode: AutovalidateMode.disabled,
         style: TextStyle(
           color: ColorManager.black,
           fontSize: 14.sp,

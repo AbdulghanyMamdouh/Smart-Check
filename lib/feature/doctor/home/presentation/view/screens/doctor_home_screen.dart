@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
+import 'package:smart_check/core/utils/shared_preference_utils.dart';
 import 'package:smart_check/core/widgets/easy_date_package.dart';
-import 'package:smart_check/feature/auth/domain/entity/login_result_entity.dart';
+import 'package:smart_check/feature/auth/presentation/view/login_admin_screen.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/screens/add_condition_screen.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/condition_item.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_state.dart';
@@ -16,12 +17,9 @@ class DoctorHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        final args =
-            ModalRoute.of(context)!.settings.arguments as LoginResultEntity;
         DoctorHomeViewModel viewModel = context.read<DoctorHomeViewModel>();
         WidgetsBinding.instance.addPostFrameCallback((_) {
           viewModel.getAllExaminations(
-            branchName: args.user?.branchName ?? "دمنهور",
             dateTime: DateTime.now(),
           );
         });
@@ -40,9 +38,19 @@ class DoctorHomeScreen extends StatelessWidget {
           appBar: AppBar(
             centerTitle: false,
             backgroundColor: const Color.fromARGB(226, 55, 145, 228),
-
+            leading: IconButton(
+              onPressed: () async {
+                await SharedPreferenceUtils.removeDate(key: 'token');
+                await SharedPreferenceUtils.removeDate(key: 'login');
+                if (!context.mounted) return;
+                Navigator.of(
+                  context,
+                ).pushReplacementNamed(LoginAdminScreen.routeName);
+              },
+              icon: Icon(Icons.logout_outlined),
+            ),
             title: Text(
-              'الحالات المسجلة',
+              'الحالات المسجلة ${viewModel.empBranchName}',
               style: TextStyle(
                 color: ColorManager.white,
               ),
@@ -54,7 +62,6 @@ class DoctorHomeScreen extends StatelessWidget {
                 EasyDatePackage(
                   onDateChange: (selectedDate) {
                     viewModel.getAllExaminations(
-                      branchName: "دمنهور",
                       dateTime: selectedDate,
                     );
                   },
@@ -82,8 +89,9 @@ class DoctorHomeScreen extends StatelessWidget {
                           state.examinations == []) {
                         return Padding(
                           padding: EdgeInsets.only(top: 50.h),
+
                           child: Center(
-                            child: Image.asset('assets/images/empty.png'),
+                            child: Image.asset('assets/images/lab.png'),
                           ),
                         );
                       } else {
@@ -101,7 +109,7 @@ class DoctorHomeScreen extends StatelessWidget {
                       }
                     } else {
                       return Center(
-                        child: Image.asset('assets/images/empty.png'),
+                        child: Image.asset('assets/images/lab.png'),
                       );
                     }
                   },

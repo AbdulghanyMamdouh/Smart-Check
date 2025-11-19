@@ -1,4 +1,4 @@
-import 'package:smart_check/feature/doctor/home/domain/entity/examination_entity.dart';
+import 'package:smart_check/core/entity/examination_entity.dart';
 
 abstract class DoctorHomeState {}
 

@@ -111,7 +111,7 @@ class SearchScreen extends StatelessWidget {
 
                 /// DEFAULT
                 return Center(
-                  child: Image.asset('assets/images/empty.png'),
+                  child: Image.asset('assets/images/lab.png'),
                 );
               },
             ),

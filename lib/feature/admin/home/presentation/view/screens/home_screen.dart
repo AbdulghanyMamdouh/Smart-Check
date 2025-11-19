@@ -85,10 +85,7 @@ class HomeScreen extends StatelessWidget {
                     return Padding(
                       padding: EdgeInsets.only(top: 50.h),
                       child: Center(
-                        child: Text(
-                          "لا توجد نتائج",
-                          style: TextStyle(fontSize: 20.sp),
-                        ),
+                        child: Image.asset('assets/images/lab.png'),
                       ),
                     );
                   } else {
@@ -106,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                   }
                 } else {
                   return Center(
-                    child: Image.asset('assets/images/empty.png'),
+                    child: Image.asset('assets/images/lab.png'),
                   );
                 }
               },

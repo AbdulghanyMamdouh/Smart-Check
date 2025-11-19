@@ -11,7 +11,6 @@ import 'package:smart_check/feature/auth/presentation/view/login_admin_screen.da
 import 'package:smart_check/feature/admin/home/presentation/view/screens/home_screen.dart';
 import 'package:smart_check/feature/admin/manager/presentation/view/screens/manager_screen.dart';
 import 'package:smart_check/feature/auth/presentation/view/login_emp_screen.dart';
-import 'package:smart_check/feature/auth/presentation/view_model/auth_view_model.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/screens/add_condition_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/screens/doctor_condition_details_screen.dart';
@@ -21,8 +20,8 @@ import 'package:smart_check/feature/search/presentation/view/screens/search_scre
 import 'package:smart_check/feature/search/presentation/view_model/search_view_model.dart';
 
 class SmartCheckApp extends StatelessWidget {
-  const SmartCheckApp({super.key});
-
+  const SmartCheckApp({super.key, required this.initialRoute});
+  final String initialRoute;
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -44,10 +43,7 @@ class SmartCheckApp extends StatelessWidget {
               homeUseCase: injectHomeUseCase(),
             ),
           ),
-          BlocProvider(
-            create: (context) =>
-                AuthViewModel(loginUseCase: injectLoginUseCase()),
-          ),
+
           BlocProvider(
             create: (context) => ManagerViewModel(
               addEmployeeUseCase: injectAddEmployeeUseCase(),
@@ -74,7 +70,7 @@ class SmartCheckApp extends StatelessWidget {
             LoginEmpScreen.routeName: (_) => LoginEmpScreen(),
             SearchScreen.routeName: (_) => SearchScreen(),
           },
-          initialRoute: FragmentScreen.routeName,
+          initialRoute: initialRoute,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

@@ -6,7 +6,6 @@ import 'package:smart_check/core/utils/failure.dart';
 import 'package:smart_check/feature/doctor/home/data/model/complete_examination_request_dto.dart';
 import 'package:smart_check/feature/doctor/home/data/model/examination.dart';
 import 'package:smart_check/feature/doctor/home/data/model/get_examination_response.dart';
-import 'package:smart_check/feature/doctor/home/data/model/update_examination_request_dto.dart';
 
 class HomeDoctorApiManager {
   HomeDoctorApiManager._();
@@ -63,21 +62,14 @@ class HomeDoctorApiManager {
   }
 
   Future<Either<Failures, String>> updateExamination({
-    required int examinationId,
-    required String key,
-    required String value,
+    required CompleteExaminationRequestDto examination,
   }) async {
     bool connected = await isConnected();
     if (connected) {
-      final examinationReuest = UpdateExaminationRequestDto(
-        id: examinationId,
-        key: key,
-        value: value,
-      );
       try {
         final response = await dio.put(
           ApiConstant.updateExamination,
-          data: examinationReuest.toJson(),
+          data: examination.toJson(),
         );
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
           return Right('تم نحديث الحالة بنجاح');

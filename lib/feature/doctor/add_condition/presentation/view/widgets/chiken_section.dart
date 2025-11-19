@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/doctor/add_condition/presentation/view/widgets/client_text_field_item.dart';
@@ -9,11 +8,12 @@ import 'package:smart_check/feature/doctor/add_condition/presentation/view_model
 class ChikenSection extends StatelessWidget {
   const ChikenSection({
     super.key,
+    required this.viewModel,
   });
+  final AddExaminationViewModel viewModel;
+
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.read<AddExaminationViewModel>();
-
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(8.w),

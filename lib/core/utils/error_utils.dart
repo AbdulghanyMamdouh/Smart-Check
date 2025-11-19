@@ -6,7 +6,9 @@ class ErrorUtils extends StatelessWidget {
   final String errorMsg;
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -16,6 +18,8 @@ class ErrorUtils extends StatelessWidget {
           Text(
             errorMsg,
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 4,
           ),
           const Text('Please try again later', style: TextStyle(fontSize: 18)),
         ],

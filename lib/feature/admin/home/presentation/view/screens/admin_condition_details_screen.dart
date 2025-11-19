@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
-import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
+import 'package:smart_check/core/entity/examination_entity.dart';
 import 'package:smart_check/core/widgets/care_info.dart';
 import 'package:smart_check/core/widgets/chiken_info.dart';
 
@@ -20,13 +20,13 @@ class AdminConditionDetailsScreen extends StatelessWidget {
           spacing: 8.w,
           children: [
             Text(
-              'امين صبري عفيفي',
+              examination.clientName ?? 'امين صبري عفيفي',
               style: TextStyle(
                 color: ColorManager.white,
               ),
             ),
             Text(
-              '23',
+              examination.clientCode ?? '23',
               style: TextStyle(
                 color: ColorManager.darkPrimary,
               ),

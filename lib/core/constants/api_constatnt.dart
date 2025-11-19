@@ -9,7 +9,7 @@ class ApiConstant {
   static const String getExaminationsByDate = 'search/by-date';
   static const String getExaminationsByClientCode = 'search/by-client_code';
 
-  static const String addExamination = 'labmanager/examination';
+  static const String addExamination = 'examination';
   static const String completeExamination = 'examination/update';
   static const String updateExamination = 'examination/update';
 }

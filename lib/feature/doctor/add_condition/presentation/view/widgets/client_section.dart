@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/utils/validator.dart';
@@ -9,10 +8,12 @@ import 'package:smart_check/feature/doctor/add_condition/presentation/view_model
 class ClientSection extends StatelessWidget {
   const ClientSection({
     super.key,
+    required this.viewModel,
   });
+  final AddExaminationViewModel viewModel;
+
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.read<AddExaminationViewModel>();
     return Container(
       width: double.infinity,
 
@@ -60,7 +61,7 @@ class ClientSection extends StatelessWidget {
                 child: ClientTextFieldItem(
                   labelText: 'اسم العميل',
                   controller: viewModel.clientName,
-
+                  keyboardType: TextInputType.name,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'من فضلك ادخل اسم العميل';
@@ -73,7 +74,7 @@ class ClientSection extends StatelessWidget {
                 child: ClientTextFieldItem(
                   labelText: ' رقم الهاتف',
                   controller: viewModel.clientPhone,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.phone,
                   validator: (value) {
                     if (!Validator.isPhoneEg(value)) {
                       return 'يقبل فقط الارقام المصرية';
@@ -95,6 +96,7 @@ class ClientSection extends StatelessWidget {
                 child: ClientTextFieldItem(
                   labelText: 'العنوان',
                   controller: viewModel.clientAddress,
+                  keyboardType: TextInputType.name,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'من فضلك ادخل العنوان';

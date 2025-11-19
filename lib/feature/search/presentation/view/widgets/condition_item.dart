@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_check/core/entity/examination_entity.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/feature/admin/home/presentation/view/screens/admin_condition_details_screen.dart';
-import 'package:smart_check/feature/search/domain/entity/examination_entity.dart';
 
 class ConditionItem extends StatelessWidget {
   const ConditionItem({super.key, required this.examinationEntity});
@@ -51,13 +51,13 @@ class ConditionItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'امين صبري عفيفي',
+                  examinationEntity.clientName ?? 'امين صبري عفيفي',
                   style: Theme.of(
                     context,
                   ).textTheme.titleMedium!.copyWith(color: ColorManager.black),
                 ),
                 Text(
-                  'الوفائية البحيرة',
+                  examinationEntity.clientAddress ?? 'الوفائية البحيرة',
                   style: Theme.of(
                     context,
                   ).textTheme.titleMedium!.copyWith(color: ColorManager.black),
@@ -66,13 +66,7 @@ class ConditionItem extends StatelessWidget {
             ),
 
             Text(
-              """
-    
-    التشخيص او شي مميز 
-    
-    طويل ومرن (حوالي 14 فقرة).
-    بيسمح للطائر بالحركة في جميع الاتجاهات.
-    بيوصل بين الرأس والجذع، ويمر فيه المريء (esophagus) والقصبة الهوائية (trachea).""",
+              examinationEntity.compliant ?? '',
               style: Theme.of(
                 context,
               ).textTheme.titleMedium!.copyWith(color: ColorManager.black),

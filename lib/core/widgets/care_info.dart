@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_check/feature/admin/home/domain/entity/examination_entity.dart';
+import 'package:smart_check/core/entity/examination_entity.dart';
 import 'package:smart_check/core/widgets/information_care_item.dart';
 import 'package:smart_check/core/widgets/update_examination_bottom_sheet.dart';
 
@@ -52,18 +52,7 @@ class CareInfo extends StatelessWidget {
           InformationCareItem(
             labelText: 'الشكوي',
             hintText: examinationEntity.compliant.toString(),
-            onLongPress: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) => UpdateExaminationBottomSheet(
-                  examinationId: examinationEntity.id ?? 2,
-                  keyString: 'compliant',
-                  value:
-                      examinationEntity.compliant ??
-                      ' eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen \n hai eiejr owo whr rje ejejw wje jeen',
-                ),
-              );
-            },
+            onLongPress: () {},
           ),
           InformationCareItem(
             labelText: 'التشريح',
@@ -72,9 +61,12 @@ class CareInfo extends StatelessWidget {
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
             onLongPress: () {
               showModalBottomSheet(
+                isScrollControlled: true,
+
                 context: context,
                 builder: (context) => UpdateExaminationBottomSheet(
-                  examinationId: examinationEntity.id,
+                  examinationEntity: examinationEntity,
+
                   keyString: 'anatomy',
                   value:
                       examinationEntity.anatomy ??
@@ -90,9 +82,12 @@ class CareInfo extends StatelessWidget {
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
             onLongPress: () {
               showModalBottomSheet(
+                isScrollControlled: true,
+
                 context: context,
                 builder: (context) => UpdateExaminationBottomSheet(
-                  examinationId: examinationEntity.id,
+                  examinationEntity: examinationEntity,
+
                   keyString: 'diagnosis',
                   value:
                       examinationEntity.diagnosis ??
@@ -108,9 +103,12 @@ class CareInfo extends StatelessWidget {
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
             onLongPress: () {
               showModalBottomSheet(
+                isScrollControlled: true,
+
                 context: context,
                 builder: (context) => UpdateExaminationBottomSheet(
-                  examinationId: examinationEntity.id,
+                  examinationEntity: examinationEntity,
+
                   keyString: 'immunisationProgram',
                   value:
                       examinationEntity.immunisationProgram ??
@@ -126,9 +124,12 @@ class CareInfo extends StatelessWidget {
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
             onLongPress: () {
               showModalBottomSheet(
+                isScrollControlled: true,
+
                 context: context,
                 builder: (context) => UpdateExaminationBottomSheet(
-                  examinationId: examinationEntity.id,
+                  examinationEntity: examinationEntity,
+
                   keyString: 'lastAntibiotic',
                   value:
                       examinationEntity.lastAntibiotic ??
@@ -144,9 +145,12 @@ class CareInfo extends StatelessWidget {
                 'hai eiejr owo whr rje ejejw wje jeen \n eidm eowm peptt cmmf,dos firrt doepe \nogjgpro jpogjg jlajg ,nghsl gur rmgbg',
             onLongPress: () {
               showModalBottomSheet(
+                isScrollControlled: true,
+
                 context: context,
                 builder: (context) => UpdateExaminationBottomSheet(
-                  examinationId: examinationEntity.id,
+                  examinationEntity: examinationEntity,
+
                   keyString: 'treatment',
                   value:
                       examinationEntity.treatment ??

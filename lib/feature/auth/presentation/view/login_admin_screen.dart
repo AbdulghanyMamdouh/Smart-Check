@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_check/core/di/di.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/utils/custom_dialog.dart';
 import 'package:smart_check/core/utils/shared_preference_utils.dart';
@@ -8,17 +9,18 @@ import 'package:smart_check/core/utils/validator.dart';
 import 'package:smart_check/core/widgets/default_button.dart';
 import 'package:smart_check/core/widgets/default_text_field.dart';
 import 'package:smart_check/feature/admin/home/presentation/view/screens/fragment_screen.dart';
-import 'package:smart_check/feature/admin/home/presentation/view/screens/home_screen.dart';
+import 'package:smart_check/feature/auth/presentation/view/login_emp_screen.dart';
 import 'package:smart_check/feature/auth/presentation/view_model/auth_states.dart';
 import 'package:smart_check/feature/auth/presentation/view_model/auth_view_model.dart';
 
 class LoginAdminScreen extends StatelessWidget {
-  const LoginAdminScreen({super.key});
+  LoginAdminScreen({super.key});
   static const String routeName = 'login';
+  final viewModel = AuthViewModel(loginUseCase: injectLoginUseCase());
   @override
   Widget build(BuildContext context) {
-    var viewModel = context.read<AuthViewModel>();
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         toolbarHeight: 200.h,
         centerTitle: true,
@@ -35,80 +37,82 @@ class LoginAdminScreen extends StatelessWidget {
         padding: EdgeInsets.only(left: 16.w, right: 16.w),
         child: Form(
           key: viewModel.adminFormKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 50.h),
-              Text(
-                'Welcome to SmartCheck',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: ColorManager.darkPrimary,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 50.h),
+                Text(
+                  'Welcome to SmartCheck',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: ColorManager.darkPrimary,
+                  ),
                 ),
-              ),
-              Text(
-                'تسجيل دخول مسؤول النظام',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: ColorManager.primary,
+                Text(
+                  'تسجيل دخول مسؤول النظام',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: ColorManager.primary,
+                  ),
                 ),
-              ),
-              SizedBox(height: 25.h),
-              DefaultTextField(
-                controller: viewModel.userNameController,
-                label: 'ادخل اسم المستخدم',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'invalid user name!.';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20.h),
-              DefaultTextField(
-                isPassword: true,
-                validator: (value) {
-                  if (!Validator.isPassowrd(value)) {
-                    return 'invalid password!.';
-                  }
-                  return null;
-                },
-                controller: viewModel.passwordController,
-                label: 'ادخل كلمة المرور',
-              ),
+                SizedBox(height: 25.h),
+                DefaultTextField(
+                  controller: viewModel.userNameController,
+                  label: 'ادخل اسم المستخدم',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'invalid user name!.';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20.h),
+                DefaultTextField(
+                  isPassword: true,
+                  validator: (value) {
+                    if (!Validator.isPassowrd(value)) {
+                      return 'invalid password!.';
+                    }
+                    return null;
+                  },
+                  controller: viewModel.passwordController,
+                  label: 'ادخل كلمة المرور',
+                ),
 
-              TextButton(
-                onPressed: () {
-                  viewModel.clearInputs();
-                  Navigator.pushNamed(
-                    context,
-                    FragmentScreen.routeName,
-                  ).then((_) => viewModel.clearInputs());
-                },
+                TextButton(
+                  onPressed: () {
+                    viewModel.clearInputs();
+                    Navigator.pushNamed(
+                      context,
+                      LoginEmpScreen.routeName,
+                    );
+                  },
 
-                child: Container(
-                  padding: const EdgeInsets.only(bottom: 2.0),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: ColorManager.textColor,
-                        width: 1.0, // Underline thickness
+                  child: Container(
+                    padding: const EdgeInsets.only(bottom: 2.0),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: ColorManager.textColor,
+                          width: 1.0, // Underline thickness
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      'لتسجيل الدخول كموظف اضغط هنا؟',
+                      style: TextStyle(
+                        color: ColorManager.primary,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
-                  child: Text(
-                    'لتسجيل الدخول كموظف اضغط هنا؟',
-                    style: TextStyle(
-                      color: ColorManager.primary,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -132,8 +136,12 @@ class LoginAdminScreen extends StatelessWidget {
                 key: 'token',
                 value: state.loginResult.token,
               );
+              SharedPreferenceUtils.saveData(
+                key: 'login',
+                value: 'admin',
+              );
               //todo: go to home
-              Navigator.of(context).pushNamed(HomeScreen.routeName);
+              Navigator.of(context).pushNamed(FragmentScreen.routeName);
             } else if (state is AdminLoginError) {
               CustomDialog.hideLoading(context);
               CustomDialog.showMessage(state.errorMsg);

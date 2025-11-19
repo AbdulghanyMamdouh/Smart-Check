@@ -80,6 +80,7 @@ class AddEmployeeBottomSheet extends StatelessWidget {
                     //navigate to home
                     CustomDialog.hideLoading(context);
                     CustomDialog.showMessage(state.sucMsg);
+                    Navigator.of(context).pop();
                   } else if (state is AddEmployeeError) {
                     CustomDialog.hideLoading(context);
                     CustomDialog.showMessage(state.errMsg);
