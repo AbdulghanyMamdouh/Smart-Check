@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_check/core/theme/color_manager.dart';
+import 'package:smart_check/core/utils/loading_indicator.dart';
 import 'package:smart_check/core/widgets/search_text_field.dart';
 import 'package:smart_check/feature/search/presentation/view/widgets/condition_item.dart';
 import 'package:smart_check/feature/search/presentation/view_model/search_state.dart';
@@ -19,6 +20,7 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: false,
         backgroundColor: const Color.fromARGB(226, 55, 145, 228),
+        foregroundColor: ColorManager.white,
         actions: [
           /// Date Picker
           IconButton(
@@ -29,7 +31,7 @@ class SearchScreen extends StatelessWidget {
               final picked = await showDatePicker(
                 context: context,
                 initialDate: DateTime.now(),
-                firstDate: DateTime.now().subtract(const Duration(days: 120)),
+                firstDate: DateTime.now().subtract(const Duration(days: 360)),
                 lastDate: DateTime.now(),
               );
 
@@ -65,7 +67,12 @@ class SearchScreen extends StatelessWidget {
                 /// LOADING
                 if (state is GetExByClIDLoading ||
                     state is GetExByDateLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LoadingIndicator(),
+                    ],
+                  );
                 }
 
                 /// ERROR
@@ -88,17 +95,19 @@ class SearchScreen extends StatelessWidget {
                 if (state is GetExByClIDSuccess ||
                     state is GetExByDateSuccess) {
                   final exams = state.examinations;
-
                   if (exams.isEmpty) {
                     return Padding(
                       padding: EdgeInsets.only(top: 50.h),
-                      child: Text(
-                        "لا توجد نتائج",
-                        style: TextStyle(fontSize: 20.sp),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            Image.asset('assets/images/lab.png'),
+                            Text('لا توجد نتائج للبحث'),
+                          ],
+                        ),
                       ),
                     );
                   }
-
                   return ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),

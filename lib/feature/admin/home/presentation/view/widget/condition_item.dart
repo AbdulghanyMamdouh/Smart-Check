@@ -53,13 +53,13 @@ class ConditionItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  examinationEntity.clientName ?? 'امين صبري عفيفي',
+                  examinationEntity.clientName ?? 'null',
                   style: Theme.of(
                     context,
                   ).textTheme.titleMedium!.copyWith(color: ColorManager.black),
                 ),
                 Text(
-                  examinationEntity.clientAddress ?? 'الوفائية البحيرة',
+                  examinationEntity.clientAddress ?? 'null',
                   style: Theme.of(
                     context,
                   ).textTheme.titleMedium!.copyWith(color: ColorManager.black),
@@ -68,7 +68,7 @@ class ConditionItem extends StatelessWidget {
             ),
 
             Text(
-              examinationEntity.compliant ?? '',
+              examinationEntity.compliant ?? 'null',
               style: Theme.of(
                 context,
               ).textTheme.titleMedium!.copyWith(color: ColorManager.black),

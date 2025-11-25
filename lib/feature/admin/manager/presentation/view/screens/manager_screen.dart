@@ -42,10 +42,14 @@ class ManagerScreen extends StatelessWidget {
               onPressed: () async {
                 await SharedPreferenceUtils.removeDate(key: 'token');
                 await SharedPreferenceUtils.removeDate(key: 'login');
+                await SharedPreferenceUtils.removeDate(key: 'token_saved_at');
+
                 if (!context.mounted) return;
-                Navigator.of(
+                Navigator.pushNamedAndRemoveUntil(
                   context,
-                ).pushReplacementNamed(LoginAdminScreen.routeName);
+                  LoginAdminScreen.routeName,
+                  (route) => false,
+                );
               },
               icon: Icon(Icons.logout_outlined),
             ),

@@ -176,13 +176,7 @@ final dio =
                 RequestOptions options,
                 RequestInterceptorHandler handler,
               ) async {
-                // Do something before request is sent.
-                // If you want to resolve the request with custom data,
-                // you can resolve a `Response` using `handler.resolve(response)`.
-                // If you want to reject the request with a error message,
-                // you can reject with a `DioException` using `handler.reject(dioError)`.
                 final token = SharedPreferenceUtils.getData(key: 'token');
-
                 if (token != null) {
                   print('\n===============\ntoken not null');
                   options.headers = {
@@ -199,3 +193,21 @@ final dio =
               },
         ),
       );
+Future<bool> isTokenExpired() async {
+  final savedTimeString = SharedPreferenceUtils.getData(key: 'token_saved_at');
+  if (savedTimeString == null) return true;
+
+  final savedTime = DateTime.parse(savedTimeString as String);
+  final now = DateTime.now();
+
+  final differenceInDays = now.difference(savedTime).inDays;
+  if (differenceInDays >= 5) {
+    await SharedPreferenceUtils.removeDate(key: 'token');
+    await SharedPreferenceUtils.removeDate(key: 'login');
+    await SharedPreferenceUtils.removeDate(key: 'token_saved_at');
+    await SharedPreferenceUtils.removeDate(key: 'branch');
+    return true;
+  } else {
+    return false;
+  }
+}

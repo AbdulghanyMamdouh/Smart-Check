@@ -4,6 +4,7 @@ import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/entity/examination_entity.dart';
 import 'package:smart_check/core/widgets/care_info.dart';
 import 'package:smart_check/core/widgets/chiken_info.dart';
+import 'package:smart_check/core/widgets/client_personal_info.dart';
 
 class AdminConditionDetailsScreen extends StatelessWidget {
   const AdminConditionDetailsScreen({super.key});
@@ -20,13 +21,7 @@ class AdminConditionDetailsScreen extends StatelessWidget {
           spacing: 8.w,
           children: [
             Text(
-              examination.clientName ?? 'امين صبري عفيفي',
-              style: TextStyle(
-                color: ColorManager.white,
-              ),
-            ),
-            Text(
-              examination.clientCode ?? '23',
+              examination.branchName ?? 'null',
               style: TextStyle(
                 color: ColorManager.darkPrimary,
               ),
@@ -59,6 +54,9 @@ class AdminConditionDetailsScreen extends StatelessWidget {
           child: Column(
             spacing: 10.h,
             children: [
+              ClientPersonalInfo(
+                examinationEntity: examination,
+              ),
               ChikenInfo(
                 examinationEntity: examination,
               ),

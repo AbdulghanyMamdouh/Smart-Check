@@ -26,7 +26,12 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(ManagerScreen.routeName);
+          Navigator.of(context).pushNamed(ManagerScreen.routeName).then((_) {
+            viewModel.getAllExaminations(
+              dateTime: DateTime.now(),
+              branchName: branchName,
+            );
+          });
         },
         backgroundColor: ColorManager.darkPrimary,
         child: Icon(
@@ -38,7 +43,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: false,
         backgroundColor: const Color.fromARGB(226, 55, 145, 228),
-
+        foregroundColor: ColorManager.white,
         title: Text(
           branchName,
           style: TextStyle(color: ColorManager.white),

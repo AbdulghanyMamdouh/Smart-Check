@@ -9,6 +9,7 @@ import 'package:smart_check/feature/doctor/add_condition/presentation/view/scree
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/condition_item.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_state.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view_model/doctor_home_view_model.dart';
+import 'package:smart_check/feature/search/presentation/view/screens/search_screen.dart';
 
 class DoctorHomeScreen extends StatelessWidget {
   const DoctorHomeScreen({super.key});
@@ -26,35 +27,63 @@ class DoctorHomeScreen extends StatelessWidget {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(AddConditionScreen.routeName);
+              Navigator.of(
+                context,
+              ).pushNamed(AddConditionScreen.routeName).then((_) {
+                viewModel.getAllExaminations(
+                  dateTime: DateTime.now(),
+                );
+              });
             },
             backgroundColor: ColorManager.darkPrimary,
             child: Icon(
               Icons.add,
-              size: 30.sp,
+              size: 38.sp,
               color: ColorManager.white,
             ),
           ),
           appBar: AppBar(
             centerTitle: false,
             backgroundColor: const Color.fromARGB(226, 55, 145, 228),
+            foregroundColor: ColorManager.white,
             leading: IconButton(
               onPressed: () async {
                 await SharedPreferenceUtils.removeDate(key: 'token');
                 await SharedPreferenceUtils.removeDate(key: 'login');
+                await SharedPreferenceUtils.removeDate(key: 'token_saved_at');
+                await SharedPreferenceUtils.removeDate(key: 'branch');
+
                 if (!context.mounted) return;
-                Navigator.of(
+                Navigator.pushNamedAndRemoveUntil(
                   context,
-                ).pushReplacementNamed(LoginAdminScreen.routeName);
+                  LoginAdminScreen.routeName,
+                  (route) => false,
+                );
               },
-              icon: Icon(Icons.logout_outlined),
+              icon: Icon(
+                Icons.logout_outlined,
+                size: 34.sp,
+              ),
             ),
             title: Text(
-              'الحالات المسجلة ${viewModel.empBranchName}',
+              'الحالات المسجلة',
               style: TextStyle(
                 color: ColorManager.white,
               ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(
+                    context,
+                  ).pushNamed(SearchScreen.routeName);
+                },
+                icon: Icon(
+                  Icons.content_paste_search_rounded,
+                  size: 34.sp,
+                ),
+              ),
+            ],
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -70,7 +99,11 @@ class DoctorHomeScreen extends StatelessWidget {
                   bloc: viewModel,
                   builder: (context, state) {
                     if (state is GetAllExLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Padding(
+                        padding: EdgeInsetsGeometry.all(30),
+
+                        child: CircularProgressIndicator(),
+                      );
                     } else if (state is GetAllExError) {
                       return Center(
                         child: Padding(
@@ -91,7 +124,9 @@ class DoctorHomeScreen extends StatelessWidget {
                           padding: EdgeInsets.only(top: 50.h),
 
                           child: Center(
-                            child: Image.asset('assets/images/lab.png'),
+                            child: Image.asset(
+                              'assets/images/lab.png',
+                            ),
                           ),
                         );
                       } else {

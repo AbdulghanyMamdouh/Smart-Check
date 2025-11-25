@@ -96,7 +96,7 @@ class LoginEmpScreen extends StatelessWidget {
         ),
         child: BlocListener<AuthViewModel, AuthState>(
           bloc: viewModel,
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is EmployeeLoginLoading) {
               //todo: show loading
               CustomDialog.showLoading(context);
@@ -105,21 +105,25 @@ class LoginEmpScreen extends StatelessWidget {
 
               CustomDialog.hideLoading(context);
               //todo: save token
-              SharedPreferenceUtils.saveData(
+              await SharedPreferenceUtils.saveData(
                 key: 'token',
                 value: state.loginResult.token,
               );
-              SharedPreferenceUtils.saveData(
+              await SharedPreferenceUtils.saveData(
                 key: 'login',
                 value: 'emp',
               );
-              SharedPreferenceUtils.saveData(
+              await SharedPreferenceUtils.saveData(
+                key: 'token_saved_at',
+                value: DateTime.now().toIso8601String(),
+              );
+              await SharedPreferenceUtils.saveData(
                 key: 'branch',
                 value: state.loginResult.user!.branchName,
               );
               //todo: go to home
-
-              Navigator.of(context).pushNamed(
+              if (!context.mounted) return;
+              Navigator.of(context).pushReplacementNamed(
                 DoctorHomeScreen.routeName,
               );
             } else if (state is EmployeeLoginError) {

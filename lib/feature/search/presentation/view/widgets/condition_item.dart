@@ -33,7 +33,9 @@ class ConditionItem extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               blurStyle: BlurStyle.inner,
-              color: Colors.blue,
+              color: examinationEntity.isCompleted ?? false
+                  ? Colors.blue
+                  : ColorManager.red,
               blurRadius: 5,
               spreadRadius: 0,
               offset: Offset(-3, 4),
@@ -46,18 +48,36 @@ class ConditionItem extends StatelessWidget {
 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 8.h,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  examinationEntity.clientName ?? 'امين صبري عفيفي',
+                  examinationEntity.clientName ?? 'null',
                   style: Theme.of(
                     context,
                   ).textTheme.titleMedium!.copyWith(color: ColorManager.black),
                 ),
                 Text(
-                  examinationEntity.clientAddress ?? 'الوفائية البحيرة',
+                  examinationEntity.clientAddress ?? 'null',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium!.copyWith(color: ColorManager.black),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'خاص بمعمل',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium!.copyWith(color: ColorManager.black),
+                ),
+                Text(
+                  examinationEntity.branchName ?? 'null',
                   style: Theme.of(
                     context,
                   ).textTheme.titleMedium!.copyWith(color: ColorManager.black),

@@ -7,7 +7,7 @@ class SearchTextField extends StatelessWidget {
     super.key,
     required this.onChanged,
   });
-  void Function(String)? onChanged;
+   void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {

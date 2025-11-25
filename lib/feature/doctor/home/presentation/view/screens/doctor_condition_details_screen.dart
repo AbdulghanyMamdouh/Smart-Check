@@ -6,6 +6,7 @@ import 'package:smart_check/core/theme/color_manager.dart';
 import 'package:smart_check/core/utils/custom_dialog.dart';
 import 'package:smart_check/core/widgets/care_info.dart';
 import 'package:smart_check/core/widgets/chiken_info.dart';
+import 'package:smart_check/core/widgets/client_personal_info.dart';
 import 'package:smart_check/core/widgets/default_button.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/additional_program_section.dart';
 import 'package:smart_check/feature/doctor/home/presentation/view/widgets/care_program_section.dart';
@@ -28,22 +29,11 @@ class DoctorConditionDetailsScreen extends StatelessWidget {
         backgroundColor: const Color.fromARGB(226, 55, 145, 228),
         foregroundColor: ColorManager.white,
 
-        title: Row(
-          spacing: 8.w,
-          children: [
-            Text(
-              examination.clientName ?? 'امين صبري عفيفي',
-              style: TextStyle(
-                color: ColorManager.white,
-              ),
-            ),
-            Text(
-              examination.clientCode ?? '23',
-              style: TextStyle(
-                color: ColorManager.darkPrimary,
-              ),
-            ),
-          ],
+        title: Text(
+          'تفاصيل الكشف',
+          style: TextStyle(
+            color: ColorManager.white,
+          ),
         ),
       ),
       body: examination.isCompleted!
@@ -72,6 +62,9 @@ class DoctorConditionDetailsScreen extends StatelessWidget {
                 child: Column(
                   spacing: 10.h,
                   children: [
+                    ClientPersonalInfo(
+                      examinationEntity: examination,
+                    ),
                     ChikenInfo(
                       examinationEntity: examination,
                     ),
