@@ -80,8 +80,13 @@ This ensures secure and stable session handling.
 
 ---
 
-## 📸 Screenshots  
-> ![demo for all apps](https://drive.google.com/drive/folders/1amaE7qo548no5szvAnGM2-eAohfOqI_h?usp=sharing)
+## 📸 Screenshots & Demo
+
+To view all application screens, demo videos, and UI previews, you can check the full Google Drive folder:
+
+> 👉 **[Click here to open the Demo Folder](https://drive.google.com/drive/folders/1amaE7qo548no5szvAnGM2-eAohfOqI_h)**  
+> Contains: Login, Home Screens, Case Management, Search, Admin Panel, Add Employee, and more.
+
 
 
 ## 🧱 App Architecture
